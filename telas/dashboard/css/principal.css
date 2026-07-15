@@ -1,0 +1,71 @@
+.cards {
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    
+    gap: 1rem;
+}
+
+.card {
+    background: white;
+    
+    padding: 1rem;
+    
+    border-radius: 12px;
+    
+    box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+    
+    min-height: 140px;
+}
+
+.tabela{
+    display: grid;
+
+    grid-template-areas: 
+    "titulo"
+    "table";
+
+    margin: 15% 15px 1% 15px;
+
+    background-color: white;
+    box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+    border-radius: 15px;
+    /* margin: 0 10px; */
+}
+
+
+tr, th, td{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 30px;
+}
+
+tr:nth-child(even){
+    background-color: rgb(205, 205, 205);
+    color: white;
+}
+
+.celulas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.acoes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.acoes > button{
+    padding: 5px 15px;
+    width: 70px;
+    font-weight: bold;
+    border-radius: 7px;
+}

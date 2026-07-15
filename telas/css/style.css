@@ -1,0 +1,394 @@
+@charset "UTF-8";
+
+:root{
+    --branco: #ffff;
+    --preto: #000000;
+    --cinza: #d9d9d9;
+    --cinza-escuro: #bdbdbd;
+    --cinza-claro: #e8e8e8;
+    --cinza-footer: #7B7875;
+    --font: "Inter";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+.grid-cards{
+    display: grid;
+
+    grid-template-areas: 
+    "grid-conteudo grid-conteudo grid-conteudo"
+    "card card card";
+
+    grid-template-columns: 450px 3fr;
+    grid-template-rows: 450px 3fr;
+    
+}
+
+.flex-padrao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+header{
+    height: 100px;
+}
+
+ul, a{
+    color: var(--preto);
+    list-style: none;
+    text-decoration: none;
+}
+
+.lista{
+    padding: 0 4em;
+}
+
+.links{
+    padding: 0 100px;
+}
+
+.botoes{
+    margin-right: 50px;
+}
+
+.links > li{
+    padding: 20px;
+}
+
+.botoes > li{
+    padding: 10px;
+}
+
+.botao-header{
+    background-color: var(--cinza);
+    padding: 7px 30px;
+    border-radius: 20px;
+}
+
+.logo{
+    width: 200px;
+}
+
+
+.counteiner-logo{
+    margin: 10px;
+    padding: 0 7rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero{
+    background-image: url(../assets/oficial_mesmo\ 1.png);
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-size: 600px;
+    background-color: var(--cinza);
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    padding: 0 7.5rem;
+}
+
+.conteudo{
+    width: 500px;
+}
+
+.conteudo > h1{
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.conteudo > p{
+    width: 350px;
+    font-size: 1.3rem;
+    line-height: 1.7rem;
+}
+
+.botao-hero{
+    background-color: var(--branco);
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    padding: 20px 123px;
+}
+
+.diferenciais{
+    height: 450px;
+    background-color: var(--cinza-claro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards-diferenciais{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 125px;  
+    padding: 90px;
+}
+
+.card-diferenciais{
+    background-color: var(--branco);
+    text-align: center;
+    padding: 50px 30px;
+    border-radius: 50px;
+}
+
+.icone{
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 110px;    
+}
+
+#centralidade{
+    height: 75px;
+}
+
+#desempenho{
+    width: 100px;
+    height: 90px;
+}
+
+#agilidade{
+    height: 75px;
+}
+
+.conteudo-card-diferenciais > button{
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 15px 70px;
+}
+
+.planos{
+    height: 700px;
+    background-color: var(--cinza-escuro);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.header-planos{
+    margin-top: 20px;
+    color: var(--branco);
+}
+
+.header-planos > p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 530px;
+    line-height: 1.5em;
+}
+
+.cards-planos{
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.card-planos{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: var(--cinza-claro);
+    padding: 20px;
+    height: 450px;
+    width: 400px;
+    line-height: 2.5em;
+}
+
+.botao-planos{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 5px;
+}
+
+.botao-planos>button{
+    background-color: var(--preto);
+    color: var(--branco);
+    border: none;
+    padding: 20px 120px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card-lista > ul{
+    line-height: 2.5em;
+}
+
+.planos-conteudo{
+    padding: 8px;
+}
+
+.avaliacoes{
+    height: 850px;
+    background-color: var(--cinza-claro);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-avaliacao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 20px 0  30px 0 ;
+}
+
+.header-avaliacao > p{
+    width: 550px;
+    text-align: center;
+}
+
+.cards-avaliacoes{
+    height: 80%;
+    padding: 110px;
+}
+
+.card-avaliacao{
+    background-color: var(--branco);
+    border-radius: 25px;
+    line-height: 1.5em;
+}
+
+.imagem > img{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    width: 100%;
+}
+
+.card-conteudo-avaliacoes{
+    padding: 20px;
+}
+
+.card-conteudo-avaliacoes > p{
+    margin-top: 10px;
+}
+
+.botao-avaliacao > button{
+    border: none;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 20px 144px;
+}
+
+.perguntas{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 600px;
+}
+
+.perguntas > h1{
+    margin-top: 30px;
+}
+
+.linhas{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    height: 100%;
+}
+
+.linha{
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--cinza-escuro);
+    height: 50px;
+    width: 1300px;
+    padding-left: 10px;
+    border-radius: 10px;
+    color: var(--branco);
+}
+
+.rodape{
+    background-color: var(--preto);
+    color: var(--cinza-claro);
+    display: flex;
+    justify-content: space-between;
+    height: 400px;
+    padding: 30px 110px;
+}
+
+.logo_direitos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+    padding: 0;
+}
+
+#coluna01{
+    padding: 0;
+}
+
+.colunas{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.footer-links{
+    color: var(--cinza-footer);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.texto-footer{
+    color: var(--cinza-footer);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 110px;
+}
+
+.logo-footer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#coluna04{
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
