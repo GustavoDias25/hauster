@@ -34,7 +34,8 @@ include "side-bar.php";
             <th class="celulas">Categoria</th>
             <th class="celulas">Preço</th>
             <th class="celulas">Validade</th>
-            <th class="celulas">Ações</th>
+            <th class="celulas">Quantidade</th>
+            <th class="celulas" id="th_acoes">Ações</th>
         </tr>
         <tr class="linha">
         <td class="celulas">1</td>
@@ -43,10 +44,12 @@ include "side-bar.php";
         <td class="celulas">Ração</td>
         <td class="celulas">R$50,00</td>
         <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
+        <td class="estoque"><button>Alto</button></td>
+        <td class="celulas">
+                <div class="acoes">
+                    <button id="editar">Editar</button>
+                    <button id="excluir">Excluir</button>
+                </div>
             </td>
         </tr>
         <tr class="linha">
@@ -56,10 +59,12 @@ include "side-bar.php";
         <td class="celulas">Ração</td>
         <td class="celulas">R$50,00</td>
         <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
+        <td class="estoque"><button>Alto</button></td>
+        <td class="celulas">
+                <div class="acoes">
+                    <button id="editar">Editar</button>
+                    <button id="excluir">Excluir</button>
+                </div>
             </td>
         </tr>
        <tr class="linha">
@@ -69,10 +74,12 @@ include "side-bar.php";
         <td class="celulas">Ração</td>
         <td class="celulas">R$50,00</td>
         <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
+        <td class="estoque"><button>Alto</button></td>
+        <td class="celulas">
+                <div class="acoes">
+                    <button id="editar">Editar</button>
+                    <button id="excluir">Excluir</button>
+                </div>
             </td>
         </tr>
         <tr class="linha">
@@ -82,49 +89,12 @@ include "side-bar.php";
         <td class="celulas">Ração</td>
         <td class="celulas">R$50,00</td>
         <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
-            </td>
-        </tr>
-        <tr class="linha">
-        <td class="celulas">1</td>
-        <td class="celulas">Ração Seca Suprema</td>
-        <td class="celulas">Golden</td>
-        <td class="celulas">Ração</td>
-        <td class="celulas">R$50,00</td>
-        <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
-            </td>
-        </tr>
-       <tr class="linha">
-        <td class="celulas">1</td>
-        <td class="celulas">Ração Seca Suprema</td>
-        <td class="celulas">Golden</td>
-        <td class="celulas">Ração</td>
-        <td class="celulas">R$50,00</td>
-        <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
-            </td>
-        </tr>
-        <tr class="linha">
-        <td class="celulas">1</td>
-        <td class="celulas">Ração Seca Suprema</td>
-        <td class="celulas">Golden</td>
-        <td class="celulas">Ração</td>
-        <td class="celulas">R$50,00</td>
-        <td class="celulas">25/05/2027</td>
-            <td class="acoes celulas">
-                <button id="estoque">Alto</button>
-                <button id="editar">Editar</button>
-                <button id="excluir">Excluir</button>
+        <td class="estoque"><button>Alto</button></td>
+        <td class="celulas">
+                <div class="acoes">
+                    <button id="editar">Editar</button>
+                    <button id="excluir">Excluir</button>
+                </div>
             </td>
         </tr>
     </table>
