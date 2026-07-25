@@ -6,8 +6,19 @@ require '../conexao.php';
 $stmt = $conexao->query("SELECT * FROM produtos p, categorias c WHERE p.categorias_idcategorias = c.idcategorias ORDER BY idprodutos");
 $produtos = $stmt->fetchAll();
 
+foreach($produtos as $produto){
+    if(new DateTime($produto['validade']) < new DateTime()){
+        $stmt3 = $conexao->prepare("DELETE FROM `hauster_bd`.`produtos` WHERE (`idprodutos` = :id_prod) and (`categorias_idcategorias` = :idcategoria);");
+        $stmt3->execute([':id_prod' => $produto['idprodutos'],
+                    ':idcategoria' => $produto['categorias_idcategorias']]);
+        $produtos = $stmt3->fetchAll();
+        }
+        }
+
 $stmt2 = $conexao->query("SELECT * FROM categorias");
-$categorias = $stmt2->fetchAll();
+$categorias = $stmt2->fetchAll()
+
+
 
 ?>
 <link rel="stylesheet" href="css/estoque.css">
@@ -25,6 +36,7 @@ $categorias = $stmt2->fetchAll();
             <th class="celulas">Categoria</th>
             <th class="celulas">Preço</th>
             <th class="celulas">Validade</th>
+            <th class="celulas">Quantidade</th>
             <th class="celulas">Ações</th>
         </tr>
 
@@ -51,25 +63,23 @@ $categorias = $stmt2->fetchAll();
                     <td class="celulas"><?= htmlspecialchars($produto['marca']) ?></td>
                     <td class="celulas"><?= htmlspecialchars($produto['nome']) ?></td>
                     <td class="celulas"><?= htmlspecialchars($produto['preco']) ?></td>
-                    <td class="celulas"><?= htmlspecialchars($produto['validade']) ?></td>
+                    <td class="celulas"><?=  date('d/m/Y', strtotime($produto['validade'])) ?></td>
+                    <td><button style="background-color:<?=$cor_fundo?>" id="estoque"><?= $textoEstoque?></button></td>
                     <td class="celulas">
-                        </td>
-                        <td class="acoes celulas">
-                        <button style="background-color:<?=$cor_fundo?>" id="estoque">
-                            <?= $textoEstoque?>
-                        </button>
-                        <a href="editar.php?id_prod=<?= $produto['idprodutos'] ?>&categoria=<?= $produto['nome'] ?>">
-                            <button type="button" id="editar">Editar</button>
-                        </a>
-                        <a href="excluir.php?id_prod=<?= $produto['idprodutos'] ?>&categoria=<?= $produto['categorias_idcategorias'] ?>" onclick="return confirm('Tem certeza que deseja excluir este produto?');">
-                            <button type="button" id="excluir">Excluir</button>
-                        </a>
+                        <div class="acoes">
+                            <a href="editar.php?id_prod=<?= $produto['idprodutos'] ?>&categoria=<?= $produto['nome'] ?>">
+                                <button type="button" id="editar">Editar</button>
+                            </a>
+                            <a href="excluir.php?id_prod=<?= $produto['idprodutos'] ?>&categoria=<?= $produto['categorias_idcategorias'] ?>" onclick="return confirm('Tem certeza que deseja excluir este produto?');">
+                                <button type="button" id="excluir">Excluir</button>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr class="linha">
-                <td class="celulas" colspan="6">Nenhum produto cadastrado.</td>
+                <td class="celulas" colspan="8">Nenhum produto cadastrado.</td>
             </tr>
         <?php endif; ?>
     </table>
