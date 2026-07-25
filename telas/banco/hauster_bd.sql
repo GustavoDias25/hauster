@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `cargos` (
   PRIMARY KEY (`idcargos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.cargos: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.categorias
 CREATE TABLE IF NOT EXISTS `categorias` (
@@ -35,7 +35,13 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   PRIMARY KEY (`idcategorias`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.categorias: ~5 rows (aproximadamente)
+INSERT INTO `categorias` (`idcategorias`, `nome`) VALUES
+	(1, 'ração'),
+	(2, 'brinquedo'),
+	(3, 'utensilios'),
+	(4, 'remédios'),
+	(5, 'outros');
 
 -- Copiando estrutura para tabela hauster_bd.clientes
 CREATE TABLE IF NOT EXISTS `clientes` (
@@ -47,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   PRIMARY KEY (`idclientes`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.clientes: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.clientes_has_servicos
 CREATE TABLE IF NOT EXISTS `clientes_has_servicos` (
@@ -65,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `clientes_has_servicos` (
   CONSTRAINT `fk_clientes_has_servicos_servicos1` FOREIGN KEY (`servicos_idservicos`, `servicos_funcionarios_idfuncionarios`, `servicos_funcionarios_cargos_idcargos`) REFERENCES `servicos` (`idservicos`, `funcionarios_idfuncionarios`, `funcionarios_cargos_idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.clientes_has_servicos: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.estabelecimento
 CREATE TABLE IF NOT EXISTS `estabelecimento` (
@@ -84,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `estabelecimento` (
   CONSTRAINT `fk_estabelecimento_produtos1` FOREIGN KEY (`produtos_idprodutos`, `produtos_categorias_idcategorias`) REFERENCES `produtos` (`idprodutos`, `categorias_idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.estabelecimento: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.funcionarios
 CREATE TABLE IF NOT EXISTS `funcionarios` (
@@ -102,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   CONSTRAINT `fk_funcionarios_cargos1` FOREIGN KEY (`cargos_idcargos`) REFERENCES `cargos` (`idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.funcionarios: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.itens_pedido
 CREATE TABLE IF NOT EXISTS `itens_pedido` (
@@ -119,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `itens_pedido` (
   CONSTRAINT `fk_produtos_has_clientes_produtos1` FOREIGN KEY (`produtos_idprodutos`, `produtos_categorias_idcategorias`) REFERENCES `produtos` (`idprodutos`, `categorias_idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.itens_pedido: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.pets
 CREATE TABLE IF NOT EXISTS `pets` (
@@ -135,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `pets` (
   CONSTRAINT `fk_pets_clientes1` FOREIGN KEY (`clientes_idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.pets: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela hauster_bd.produtos
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -150,9 +156,11 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   PRIMARY KEY (`idprodutos`,`categorias_idcategorias`),
   KEY `fk_produtos_categorias1_idx` (`categorias_idcategorias`),
   CONSTRAINT `fk_produtos_categorias1` FOREIGN KEY (`categorias_idcategorias`) REFERENCES `categorias` (`idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.produtos: ~1 rows (aproximadamente)
+INSERT INTO `produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `estoque_min`, `marca`, `preco`, `categorias_idcategorias`) VALUES
+	(16, 'Ração supreme', '2027-05-25', 25, NULL, 'Golden', 110.00, 1);
 
 -- Copiando estrutura para tabela hauster_bd.servicos
 CREATE TABLE IF NOT EXISTS `servicos` (
@@ -167,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `servicos` (
   CONSTRAINT `fk_servicos_funcionarios1` FOREIGN KEY (`funcionarios_idfuncionarios`, `funcionarios_cargos_idcargos`) REFERENCES `funcionarios` (`idfuncionarios`, `cargos_idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Exportação de dados foi desmarcado.
+-- Copiando dados para a tabela hauster_bd.servicos: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
