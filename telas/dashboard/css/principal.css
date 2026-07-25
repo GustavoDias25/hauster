@@ -59,40 +59,54 @@
     "titulo"
     "table";
 
-    margin: 15% 15px 1% 15px;
+    margin: 14% 15px 1% 15px;
 
     background-color: white;
     box-shadow:
     0 1px 2px rgba(0, 0, 0, 0.05),
     0 4px 12px rgba(0, 0, 0, 0.04);
     border-radius: 15px;
-    /* margin: 0 10px; */
+}
+
+.titulo{
+    grid-area: titulo;
 }
 
 
-tr, th, td{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 30px;
+.table{
+    grid-area: table;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th,
+td{
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 tr:nth-child(even){
-    background-color: var(--primaria-base);
+    background-color: var(--primaria-200);
+    /* border: 1px solid red; */
     color: white;
+
 }
 
 .celulas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    max-width: max-content;
+    /* border: 1px solid red; */
 }
 
 .acoes{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
 }
 
 .acoes > button{
@@ -102,9 +116,17 @@ tr:nth-child(even){
     border-radius: 7px;
 }
 
-#estoque{
+th:last-child, td:last-child{
+    width: 180px;
+}
+
+.estoque > button{
     background-color: var(--estoque-alto);
     color:var(--branco);
+    padding: 5px 15px;
+    width: 70px;
+    font-weight: bold;
+    border-radius: 7px;
 }
 
 #editar{
