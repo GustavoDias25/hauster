@@ -44,6 +44,13 @@
     margin: 1% 15px 1% 15px;
 }
 
+th,
+td{
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .cabecalho-tabela{
     display: flex;
     flex-direction: row;
@@ -61,32 +68,47 @@
     border-radius: 10px;
 }
 
-tr, th, td{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 30px;
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 tr:nth-child(even){
-    background-color: var(--primaria-base);
+    background-color: var(--primaria-200);
     color: white;
+    /* border: 1px solid red; */
 }
 
 .celulas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    max-width: max-content;
+    /* border: 1px solid red; */
 }
 
 .acoes{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
+    width: 100%;
 }
 
-.acoes > button, .acoes > a > button{
+th:last-child,
+td:last-child{
+    width: 180px;
+}
+
+.acoes > button{
+    padding: 5px 15px;
+    width: 70px;
+    font-weight: bold;
+    border-radius: 7px;
+}
+
+.acoes > a > button{
     padding: 5px 15px;
     width: 70px;
     font-weight: bold;
@@ -94,6 +116,10 @@ tr:nth-child(even){
 }
 
 #estoque{
+    padding: 5px 15px;
+    width: 70px;
+    font-weight: bold;
+    border-radius: 7px;
     color: var(--branco);
 }
 
