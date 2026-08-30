@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `db_hauster`.`estabelecimento` (
   `cnpj` INT UNSIGNED NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
+  `foto` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idestabelecimento`),
   UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC))
 ENGINE = InnoDB;
