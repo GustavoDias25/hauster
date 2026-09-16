@@ -18,7 +18,7 @@ $cnpj = preg_replace('/\D/', '', $cnpj);
 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
 // --- Upload da foto (opcional) ---
-$foto_nome = null;
+$foto_nome = '../assets/foto_padrao.png';
 
 if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $permitidos = ['image/jpeg', 'image/png', 'image/webp'];
@@ -34,6 +34,12 @@ if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_O
             $foto_nome = $novo_nome; // salva só o nome do arquivo no banco
         }
     }
+}
+
+if($conf_senha != $senha){
+    $_SESSION['erro_cad'] = 'Senhas estão diferentes';
+    header('Location: index.php');
+    exit();
 }
 
 try {
