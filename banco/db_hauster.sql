@@ -14,12 +14,12 @@ USE `db_hauster` ;
 CREATE TABLE IF NOT EXISTS `db_hauster`.`estabelecimento` (
   `idestabelecimento` INT NOT NULL AUTO_INCREMENT,
   `nome_fantasia` VARCHAR(45) NOT NULL,
-  `cnpj` INT UNSIGNED NOT NULL,
+  `cnpj` VARCAHR(14) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
+  `foto` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idestabelecimento`),
   UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC))
-  `foto` VARCHAR(255) NOT NULL
 ENGINE = InnoDB;
 
 
