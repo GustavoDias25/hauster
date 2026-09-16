@@ -61,7 +61,7 @@ try {
     $_SESSION['foto'] = $foto_nome;
     $_SESSION['logado'] = true;
 
-    header('Location: ../dashboard.php?pagina=home');
+    header('Location: planos.php');
     exit;
 } catch (PDOException $e) {
     $_SESSION['erro_cad'] = 'Error ao cadastrar usuário' . $e->getMessage();
