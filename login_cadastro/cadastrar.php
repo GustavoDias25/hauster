@@ -10,6 +10,7 @@ $nome = trim($_POST['nome']);
 $cnpj = trim($_POST['CNPJ']);
 $email = trim($_POST['email']);
 $senha = trim($_POST['senha']);
+$conf_senha = trim($_POST['conf_senha']);
 
 // CNPJ no banco é INT UNSIGNED — mantém só dígitos
 $cnpj = preg_replace('/\D/', '', $cnpj);
