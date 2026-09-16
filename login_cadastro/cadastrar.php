@@ -1,6 +1,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <?php
-include 'conexao.php';
+include '../includes/conexao.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -60,7 +60,7 @@ try {
     $_SESSION['foto'] = $foto_nome;
     $_SESSION['logado'] = true;
 
-    header('Location: ../dashboard/index.php');
+    header('Location: ../dashboard.php?pagina=home');
     exit;
 } catch (PDOException $e) {
     $_SESSION['erro_cad'] = 'Error ao cadastrar usuário' . $e->getMessage();
