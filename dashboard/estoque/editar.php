@@ -9,6 +9,7 @@ if ($id <= 0) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome']);
+    $validade = $_POST['validade'];
     $categoria = $_POST['categorias'];
     $marca = trim($_POST['marca']);
     $quantidade_estoque = (int) $_POST['quantidade_estoque'];
@@ -19,9 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             $stmt = $conexao->prepare(
-                "UPDATE produtos SET nome_prod = :nome, categorias_idcategorias = :categoria, marca = :marca, estoque = :quantidade_estoque, preco = :preco WHERE idprodutos = :id"
+                "UPDATE produtos SET nome_prod = :nome, validade = :validade, categorias_idcategorias = :categoria, marca = :marca, estoque = :quantidade_estoque, preco = :preco WHERE idprodutos = :id"
             );
             $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":validade", $validade);
             $stmt->bindParam(":categoria", $categoria);
             $stmt->bindParam(":marca", $marca);
             $stmt->bindParam(":quantidade_estoque", $quantidade_estoque);
@@ -69,7 +71,7 @@ $categorias = $stmt2->fetchAll();
             </div>
             <div class="campo">
                 <label for="validade">Validade</label>
-                <input type="text" id="validade" name="validade" value="<?= htmlspecialchars($produto['validade']) ?>">
+                <input type="date" id="validade" name="validade" value="<?= htmlspecialchars($produto['validade']) ?>">
             </div>
             <div class="campo">
                 <label for="marca">Marca</label>
