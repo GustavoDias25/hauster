@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                     <div class="botao-planos">
-                        <a href="../dashboard.php?pagina=home">Começar agora</a>
+                        <a href="pagamento.php">Começar agora</a>
                     </div>
                 </div>
             </div>
