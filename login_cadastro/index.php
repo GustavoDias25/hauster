@@ -45,7 +45,7 @@
 </form>
             <p>Já possui conta? <strong><a href="login.php">Logar</a></strong></p>
         </section>
-        <script>
+       <!-- <script>
 const cnpjInput = document.getElementById("CNPJ");
 const form = document.querySelector("form");
 
@@ -95,6 +95,6 @@ form.addEventListener("submit", function (event) {
         cnpjInput.focus();
     }
 });
-</script>
+</script>-->
 </body>
 </html>
