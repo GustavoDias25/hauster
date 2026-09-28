@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS `db_hauster`.`estabelecimento` (
   UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC))
 ENGINE = InnoDB;
 
+INSERT INTO `db_hauster`.`estabelecimento` (`idestabelecimento`, `nome_fantasia`, `cnpj`, `email`, `senha`, `foto`) 
+VALUES ('1', 'Petz', '36009882000101', 'petz@gmail.com', '$2y$10$CgNQbHuJG7zvwQ1k.cI00eYjBw91J92OFl0jemMmxa3hQLd92hMQG', '../assets/foto_padrao.png');
 
 -- -----------------------------------------------------
 -- Table `db_hauster`.`clientes`
@@ -93,11 +95,11 @@ CREATE TABLE IF NOT EXISTS `db_hauster`.`categorias` (
 ENGINE = InnoDB;
 
 INSERT INTO `categorias` (`idcategorias`, `nome`) VALUES
-	(1, 'ração'),
-	(2, 'brinquedo'),
-	(3, 'utensilios'),
-	(4, 'remédios'),
-	(5, 'outros');
+	(1, 'Ração'),
+	(2, 'Brinquedo'),
+	(3, 'Utensilios'),
+	(4, 'Remédios'),
+	(5, 'Outros');
 
 
 -- -----------------------------------------------------
@@ -127,6 +129,13 @@ CREATE TABLE IF NOT EXISTS `db_hauster`.`produtos` (
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
+VALUES ('Ração seca supreme', '2027-05-25', '6', 'golden', '150.00', '1', '1');
+INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
+VALUES ('Morderdor', '2027-07-03', '10', 'golden', '20.00', '2', '1');
+INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
+VALUES ('Biodex', '2026-10-30', '20', 'BioFarm', '30.00', '4', '1');
 
 
 -- -----------------------------------------------------
