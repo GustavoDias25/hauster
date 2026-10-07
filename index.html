@@ -1,84 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hauster - Gestão completa para petshops</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Iceberg&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav class="menu flex-padrao">
+        <nav class="menu">
             <div class="counteiner-logo">
-                <img src="assets/Logo-hauster.png" alt="logo" class="logo">
+                <img src="assets/Logo-hauster.png" alt="Logo Hauster" class="logo">
             </div>
-            <ul class="lista flex-padrao">
-            <div class="links flex-padrao">    
-                <li><a href="">Inicio</a></li>
-                <li><a href="">Planos</a></li>
-                <li><a href="">Avaliações</a></li>
-                <li><a href="">FAQ</a></li>
-            </div>
-            <div class="botoes flex-padrao">
+            <ul class="links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="#avaliacoes">Avaliações</a></li>
+                <li><a href="#perguntas">Perguntas</a></li>
+            </ul>
+            <ul class="botoes">
                 <li><a href="login_cadastro/login.php" class="botao-header" id="login">Login</a></li>
                 <li><a href="login_cadastro/index.php" class="botao-header" id="cadastro">Cadastro</a></li>
-            </div>    
             </ul>
         </nav>
     </header>
-     <main class="hero">
+
+    <main class="hero" id="inicio">
         <div class="conteudo">
             <h1>Gestão completa para petshops que querem crescer.</h1>
             <p>Simplifique sua rotina. Potencialize seu negócio.</p>
-            <div>
-                <button href="" class="botao-hero">Cadastre-se</button>
-            </div>
+            <a href="login_cadastro/index.php" class="botao-hero">Cadastre-se</a>
         </div>
     </main>
+
     <section class="diferenciais">
-        <div class="cards-diferenciais grid-cards">
-            <div class="card-diferenciais card">
+        <div class="cards-diferenciais">
+            <div class="card-diferenciais">
                 <div class="icone">
                     <img src="assets/centralidade.png" alt="" class="icon" id="centralidade">
                 </div>
                 <div class="conteudo-card-diferenciais">
                     <h1>Centralidade</h1>
                     <p>A Hauster centraliza toda a gestão do pet shop num único sistema.</p>
-                    <button>Saiba Mais</button>
+                    <a href="#">Saiba Mais</a>
                 </div>
             </div>
-            <div class="card-diferenciais card"> 
+            <div class="card-diferenciais">
                 <div class="icone">
                     <img src="assets/desempenho.png" alt="" class="icon" id="desempenho">
                 </div>
                 <div class="conteudo-card-diferenciais">
                     <h1>Desempenho</h1>
                     <p>Melhora a organização e o desempenho de seus funcionários.</p>
-                    <button>Saiba Mais</button>
+                    <a href="#">Saiba Mais</a>
                 </div>
             </div>
-            <div class="card-diferenciais card"> 
+            <div class="card-diferenciais">
                 <div class="icone">
                     <img src="assets/agilidade.png" alt="" class="icon" id="agilidade">
                 </div>
                 <div class="conteudo-card-diferenciais">
                     <h1>Agilidade</h1>
-                    <p>Agiliza  o atendimento e a experiência diaria do seu cliente.</p>
-                    <button>Saiba Mais</button>
+                    <p>Agiliza o atendimento e a experiência diária do seu cliente.</p>
+                    <a href="#">Saiba Mais</a>
                 </div>
             </div>
         </div>
     </section>
-    <section class="planos grid-cards">
-        <div class="header-planos grid-conteudo">
+
+    <section class="planos" id="planos">
+        <div class="header-planos">
             <h1>Planos e preços</h1>
-            <p>Com diversas funcionalidades exclusivas, você pode gerenciar facilmente seu pet shop sem complicações, Escolha o plano ideal para o seu negócio:</p>
+            <p>Com diversas funcionalidades exclusivas, você pode gerenciar facilmente seu pet shop sem complicações. Escolha o plano ideal para o seu negócio:</p>
         </div>
         <div class="cards-planos">
-            <div class="card-planos card">
+            <div class="card-planos">
                 <div class="planos-conteudo">
                     <h3>Iniciante</h3>
                     <h1>R$29,99</h1>
@@ -92,11 +91,11 @@
                         </ul>
                     </div>
                     <div class="botao-planos">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
             </div>
-            <div class="card-planos card">
+            <div class="card-planos">
                 <div class="planos-conteudo">
                     <h3>Intermediário</h3>
                     <h1>R$49,99</h1>
@@ -110,12 +109,12 @@
                         </ul>
                     </div>
                     <div class="botao-planos">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
-                </div>
-            <div class="card-planos card">
-                <div class="planos-conteudos">
+            </div>
+            <div class="card-planos">
+                <div class="planos-conteudo">
                     <h3>Avançado</h3>
                     <h1>R$79,99</h1>
                     <p>Por Mês</p>
@@ -128,19 +127,20 @@
                         </ul>
                     </div>
                     <div class="botao-planos">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="avaliacoes grid-cards">
-        <div class="header-avaliacao grid-conteudo">
+
+    <section class="avaliacoes" id="avaliacoes">
+        <div class="header-avaliacao">
             <h2>Depoimentos</h2>
-            <p>Com nossos clientes, construimos algumas histórias de sucesso, que tal saber um pouco sobre algumas uma delas?</p>
+            <p>Com nossos clientes, construimos algumas histórias de sucesso, que tal saber um pouco sobre algumas delas?</p>
         </div>
-        <div class="cards-avaliacoes flex-padrao">
-            <div class="card-avaliacao card">
+        <div class="cards-avaliacoes">
+            <div class="card-avaliacao">
                 <div class="imagem">
                     <img src="assets/avaliacao-card01.png" alt="">
                 </div>
@@ -150,11 +150,11 @@
                     <p>Antes, eu me perdia com agendamentos e acabava esquecendo clientes. Depois que comecei a usar o sistema, meu petshop ficou muito mais organizado. Hoje consigo controlar horários, histórico dos pets e financeiro em um só lugar.</p>
                     <p>O resultado foi imediato: menos faltas, mais clientes atendidos e aumento no faturamento. Além disso, é super fácil de usar — em poucos dias já estava dominando tudo. Recomendo para qualquer petshop que queira crescer com mais organização e profissionalismo.</p>
                     <div class="botao-avaliacao">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
             </div>
-            <div class="card-avaliacao card">
+            <div class="card-avaliacao">
                 <div class="imagem">
                     <img src="assets/avaliacao-card02.png" alt="">
                 </div>
@@ -164,11 +164,11 @@
                     <p>Antes, eu me perdia com agendamentos e acabava esquecendo clientes. Depois que comecei a usar o sistema, meu petshop ficou muito mais organizado. Hoje consigo controlar horários, histórico dos pets e financeiro em um só lugar.</p>
                     <p>O resultado foi imediato: menos faltas, mais clientes atendidos e aumento no faturamento. Além disso, é super fácil de usar — em poucos dias já estava dominando tudo. Recomendo para qualquer petshop que queira crescer com mais organização e profissionalismo.</p>
                     <div class="botao-avaliacao">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
             </div>
-            <div class="card-avaliacao card">
+            <div class="card-avaliacao">
                 <div class="imagem">
                     <img src="assets/avaliacao-card03.png" alt="">
                 </div>
@@ -178,61 +178,66 @@
                     <p>Antes, eu me perdia com agendamentos e acabava esquecendo clientes. Depois que comecei a usar o sistema, meu petshop ficou muito mais organizado. Hoje consigo controlar horários, histórico dos pets e financeiro em um só lugar.</p>
                     <p>O resultado foi imediato: menos faltas, mais clientes atendidos e aumento no faturamento. Além disso, é super fácil de usar — em poucos dias já estava dominando tudo. Recomendo para qualquer petshop que queira crescer com mais organização e profissionalismo.</p>
                     <div class="botao-avaliacao">
-                        <button>Começar agora</button>
+                        <a href="#">Começar agora</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="perguntas">
+
+    <section class="perguntas" id="perguntas">
         <h1>Perguntas Frequentes</h1>
         <div class="linhas">
-            <div class="linha">
-                <p><strong>A Hauster pode ser usada por clientes do pet shop?</strong> Não, a parte de clientes é apenas para ter o melhor controle dos serviços</p>
-            </div>
-            <div class="linha">
-                <p><strong>Quais funcionalidades a Hauster oferece?</strong> A Hauster oferece um controle total do seu petshop, de seus funcionários até os recibos de pagamentos</p>
-            </div>
-            <div class="linha">
-                <p><strong>É possível controlar os agendamentos dos servicos pela plataforma?</strong> Sim, a Hauster oferece um controle otimizado dos agendamentos de serviços</p>
-            </div>
+            <details class="linha" name="faq">
+                <summary>A Hauster pode ser usada por clientes do pet shop?</summary>
+                <p>Não, a parte de clientes é apenas para ter o melhor controle dos serviços.</p>
+            </details>
+            <details class="linha" name="faq">
+                <summary>Quais funcionalidades a Hauster oferece?</summary>
+                <p>A Hauster oferece um controle total do seu petshop, de seus funcionários até os recibos de pagamentos.</p>
+            </details>
+            <details class="linha" name="faq">
+                <summary>É possível controlar os agendamentos dos serviços pela plataforma?</summary>
+                <p>Sim, a Hauster oferece um controle otimizado dos agendamentos de serviços.</p>
+            </details>
         </div>
     </section>
+
     <footer class="rodape">
         <div id="coluna01" class="logo_direitos colunas">
             <div class="logo-footer">
-                <img src="assets/Logo-hauster-branca.png" alt="">
+                <a href="#"><img src="assets/Logo-hauster-branca.png" alt="Hauster"></a>
             </div>
             <div class="texto-footer">
-                <p>Gestão completa para petshops
-                que querem crescer.</p>
+                <p>Gestão completa para petshops que querem crescer.</p>
                 <p>© 2026 Hauster. Todos os Direitos Reservados.</p>
             </div>
         </div>
         <div class="coluna02 colunas">
             <h2>Contato</h2>
             <ul class="footer-links">
-                <li>Instagram</li>
-                <li>Whatsapp</li>
-                <li>Discord</li>
-                <li>GITHUB</li>
+                <li><a href="https://www.instagram.com/gustavodias2505/" target="_blank">Instagram</a></li>
+                <li><a href="https://wa.me/5521971291279?s=t" target="_blank">Whatsapp</a></li>
+                <li><a href="https://www.figma.com/design/0DJn0ftUAF9b6e4XEw9vxf/Sem-t%25C3%25ADtulo?node-id=48-7&p=f&t=6Bg505UHnuUEeUK2-0" target="_blank">Figma</a></li>
+                <li><a href="https://github.com/GustavoDias25/hauster" target="_blank">GITHUB</a></li>
             </ul>
         </div>
         <div class="coluna03 colunas">
             <h2>Sobre Nós</h2>
             <ul class="footer-links">
-                <li>Cadastrar-se</li>
-                <li>Planos e Preços</li>
-                <li>Depoimentos</li>
-                <li>Perguntas Frequentes</li>
+                <li><a href="login_cadastro/index.php">Cadastrar-se</a></li>
+                <li><a href="#planos">Planos e Preços</a></li>
+                <li><a href="#avaliacoes">Depoimentos</a></li>
+                <li><a href="#perguntas">Perguntas Frequentes</a></li>
             </ul>
         </div>
         <div class="colunas" id="coluna04">
             <h2>Legal</h2>
             <ul class="footer-links">
-                <li>Documentação</li>
-                <li>Termos de Uso</li>
-                <li>Segurança</li>
+                <li><a href="https://word.cloud.microsoft/open/onedrive/?docId=72386ABC35C51DB8%21s88cc1fe4e05c4f108f07f276b6544111&driveId=72386ABC35C51DB8" target="_blank">Documentação</a></li>
+                <li><a href="#">Termos de Uso</a></li>
+                <li><a href="#">Segurança</a></li>
+                <li><a href="#inicio">Voltar ao topo</a></li>
             </ul>
         </div>
     </footer>
