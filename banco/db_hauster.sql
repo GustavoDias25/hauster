@@ -1,253 +1,202 @@
--- -----------------------------------------------------
--- Schema db_hauster
--- -----------------------------------------------------
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           10.4.32-MariaDB - mariadb.org binary distribution
+-- OS do Servidor:               Win64
+-- HeidiSQL Versão:              12.21.0.7344
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Schema db_hauster
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `db_hauster` DEFAULT CHARACTER SET utf8 ;
-USE `db_hauster` ;
-
--- -----------------------------------------------------
--- Table `db_hauster`.`estabelecimento`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`estabelecimento` (
-  `idestabelecimento` INT NOT NULL AUTO_INCREMENT,
-  `nome_fantasia` VARCHAR(45) NOT NULL,
-  `cnpj` INT UNSIGNED NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `senha` VARCHAR(255) NOT NULL,
-  `foto` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`idestabelecimento`),
-  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC))
-ENGINE = InnoDB;
-
-INSERT INTO `db_hauster`.`estabelecimento` (`idestabelecimento`, `nome_fantasia`, `cnpj`, `email`, `senha`, `foto`) 
-VALUES ('1', 'Petz', '36009882000101', 'petz@gmail.com', '$2y$10$CgNQbHuJG7zvwQ1k.cI00eYjBw91J92OFl0jemMmxa3hQLd92hMQG', '../assets/foto_padrao.png');
-
--- -----------------------------------------------------
--- Table `db_hauster`.`clientes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`clientes` (
-  `idclientes` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `telefone` VARCHAR(14) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `cpf` VARCHAR(11) NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`idclientes`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_clientes_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_clientes_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- -----------------------------------------------------
--- Table `db_hauster`.`cargos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`cargos` (
-  `idcargos` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idcargos`))
-ENGINE = InnoDB;
+-- Copiando estrutura do banco de dados para db_hauster
+CREATE DATABASE IF NOT EXISTS `db_hauster` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
+USE `db_hauster`;
 
+-- Copiando estrutura para tabela db_hauster.cargos
+CREATE TABLE IF NOT EXISTS `cargos` (
+  `idcargos` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcargos`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- -----------------------------------------------------
--- Table `db_hauster`.`funcionarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`funcionarios` (
-  `idfuncionarios` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `dt_nasc` DATE NOT NULL,
-  `salario` DECIMAL(10,2) NOT NULL,
-  `tipo` VARCHAR(45) NOT NULL,
-  `cpf` INT NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `telefone` INT NOT NULL,
-  `cargos_idcargos` INT NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`idfuncionarios`, `cargos_idcargos`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_funcionarios_cargos1_idx` (`cargos_idcargos` ASC),
-  INDEX `fk_funcionarios_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_funcionarios_cargos1`
-    FOREIGN KEY (`cargos_idcargos`)
-    REFERENCES `db_hauster`.`cargos` (`idcargos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_funcionarios_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando dados para a tabela db_hauster.cargos: ~0 rows (aproximadamente)
 
+-- Copiando estrutura para tabela db_hauster.categorias
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `idcategorias` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcategorias`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- -----------------------------------------------------
--- Table `db_hauster`.`categorias`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`categorias` (
-  `idcategorias` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idcategorias`))
-ENGINE = InnoDB;
-
-INSERT INTO `categorias` (`idcategorias`, `nome`) VALUES
+-- Copiando dados para a tabela db_hauster.categorias: ~5 rows (aproximadamente)
+INSERT IGNORE INTO `categorias` (`idcategorias`, `nome`) VALUES
 	(1, 'Ração'),
 	(2, 'Brinquedo'),
 	(3, 'Utensilios'),
 	(4, 'Remédios'),
 	(5, 'Outros');
 
+-- Copiando estrutura para tabela db_hauster.clientes
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `idclientes` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `telefone` varchar(14) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`idclientes`,`estabelecimento_idestabelecimento`),
+  KEY `fk_clientes_estabelecimento1_idx` (`estabelecimento_idestabelecimento`),
+  CONSTRAINT `fk_clientes_estabelecimento1` FOREIGN KEY (`estabelecimento_idestabelecimento`) REFERENCES `estabelecimento` (`idestabelecimento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- -----------------------------------------------------
--- Table `db_hauster`.`produtos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`produtos` (
-  `idprodutos` INT NOT NULL AUTO_INCREMENT,
-  `nome_prod` VARCHAR(45) NOT NULL,
-  `validade` DATE NOT NULL,
-  `estoque` INT NOT NULL,
-  `estoque_min` INT NULL,
-  `marca` VARCHAR(45) NOT NULL,
-  `preco` DECIMAL(10,2) NOT NULL,
-  `categorias_idcategorias` INT NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`idprodutos`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_produtos_categorias1_idx` (`categorias_idcategorias` ASC),
-  INDEX `fk_produtos_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_produtos_categorias1`
-    FOREIGN KEY (`categorias_idcategorias`)
-    REFERENCES `db_hauster`.`categorias` (`idcategorias`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_produtos_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando dados para a tabela db_hauster.clientes: ~0 rows (aproximadamente)
 
-INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
-VALUES ('Ração seca supreme', '2027-05-25', '6', 'golden', '150.00', '1', '1');
-INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
-VALUES ('Morderdor', '2027-07-03', '10', 'golden', '20.00', '2', '1');
-INSERT INTO `db_hauster`.`produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`)
-VALUES ('Biodex', '2026-10-30', '20', 'BioFarm', '30.00', '4', '1');
+-- Copiando estrutura para tabela db_hauster.clientes_has_servicos
+CREATE TABLE IF NOT EXISTS `clientes_has_servicos` (
+  `clientes_idclientes` int(11) NOT NULL AUTO_INCREMENT,
+  `servicos_idservicos` int(11) NOT NULL,
+  `servicos_funcionarios_idfuncionarios` int(11) NOT NULL,
+  `servicos_funcionarios_cargos_idcargos` int(11) NOT NULL,
+  `dt_servico` date NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `form_pagamente` enum('credito','debito','pix','dinheiro') NOT NULL,
+  PRIMARY KEY (`clientes_idclientes`,`servicos_idservicos`,`servicos_funcionarios_idfuncionarios`,`servicos_funcionarios_cargos_idcargos`),
+  KEY `fk_clientes_has_servicos_servicos1_idx` (`servicos_idservicos`,`servicos_funcionarios_idfuncionarios`,`servicos_funcionarios_cargos_idcargos`),
+  KEY `fk_clientes_has_servicos_clientes1_idx` (`clientes_idclientes`),
+  CONSTRAINT `fk_clientes_has_servicos_clientes1` FOREIGN KEY (`clientes_idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_clientes_has_servicos_servicos1` FOREIGN KEY (`servicos_idservicos`, `servicos_funcionarios_idfuncionarios`, `servicos_funcionarios_cargos_idcargos`) REFERENCES `servicos` (`idservicos`, `funcionarios_idfuncionarios`, `funcionarios_cargos_idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- Copiando dados para a tabela db_hauster.clientes_has_servicos: ~0 rows (aproximadamente)
 
--- -----------------------------------------------------
--- Table `db_hauster`.`pets`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`pets` (
-  `idpets` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `idade` INT NOT NULL,
-  `especie` VARCHAR(45) NOT NULL,
-  `raca` VARCHAR(45) NOT NULL,
-  `sexo` ENUM("macho", "femea") NOT NULL,
-  `clientes_idclientes` INT NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`idpets`, `clientes_idclientes`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_pets_clientes1_idx` (`clientes_idclientes` ASC),
-  INDEX `fk_pets_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_pets_clientes1`
-    FOREIGN KEY (`clientes_idclientes`)
-    REFERENCES `db_hauster`.`clientes` (`idclientes`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pets_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando estrutura para tabela db_hauster.estabelecimento
+CREATE TABLE IF NOT EXISTS `estabelecimento` (
+  `idestabelecimento` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_fantasia` varchar(45) NOT NULL,
+  `cnpj` varchar(14) NOT NULL DEFAULT '',
+  `email` varchar(45) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idestabelecimento`),
+  UNIQUE KEY `cnpj_UNIQUE` (`cnpj`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- Copiando dados para a tabela db_hauster.estabelecimento: ~2 rows (aproximadamente)
+INSERT IGNORE INTO `estabelecimento` (`idestabelecimento`, `nome_fantasia`, `cnpj`, `email`, `senha`, `foto`) VALUES
+	(3, 'Petz', '76919591000167', 'petz@gmail.com', '$2y$10$jUOERFtJ.T5CqEx4NEiH7.5GJJQU.Zh2Ds0jTklqvlda.VvYdI7RK', 'estab_6ac56cabc77b14.49851617.png');
 
--- -----------------------------------------------------
--- Table `db_hauster`.`servicos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`servicos` (
-  `idservicos` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `tempo_estimado` TIME NOT NULL,
-  `preco` DECIMAL(10,2) NOT NULL,
-  `funcionarios_idfuncionarios` INT NOT NULL,
-  `funcionarios_cargos_idcargos` INT NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`idservicos`, `funcionarios_idfuncionarios`, `funcionarios_cargos_idcargos`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_servicos_funcionarios1_idx` (`funcionarios_idfuncionarios` ASC, `funcionarios_cargos_idcargos` ASC),
-  INDEX `fk_servicos_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_servicos_funcionarios1`
-    FOREIGN KEY (`funcionarios_idfuncionarios` , `funcionarios_cargos_idcargos`)
-    REFERENCES `db_hauster`.`funcionarios` (`idfuncionarios` , `cargos_idcargos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_servicos_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando estrutura para tabela db_hauster.funcionarios
+CREATE TABLE IF NOT EXISTS `funcionarios` (
+  `idfuncionarios` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `dt_nasc` date NOT NULL,
+  `salario` decimal(10,2) NOT NULL,
+  `tipo` varchar(45) NOT NULL,
+  `cpf` int(11) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `telefone` int(11) NOT NULL,
+  `cargos_idcargos` int(11) NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`idfuncionarios`,`cargos_idcargos`,`estabelecimento_idestabelecimento`),
+  KEY `fk_funcionarios_cargos1_idx` (`cargos_idcargos`),
+  KEY `fk_funcionarios_estabelecimento1_idx` (`estabelecimento_idestabelecimento`),
+  CONSTRAINT `fk_funcionarios_cargos1` FOREIGN KEY (`cargos_idcargos`) REFERENCES `cargos` (`idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_funcionarios_estabelecimento1` FOREIGN KEY (`estabelecimento_idestabelecimento`) REFERENCES `estabelecimento` (`idestabelecimento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- Copiando dados para a tabela db_hauster.funcionarios: ~0 rows (aproximadamente)
 
--- -----------------------------------------------------
--- Table `db_hauster`.`itens_pedido`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`itens_pedido` (
-  `produtos_idprodutos` INT NOT NULL AUTO_INCREMENT,
-  `produtos_categorias_idcategorias` INT NOT NULL,
-  `clientes_idclientes` INT NOT NULL,
-  `dt_pedido` DATE NOT NULL,
-  `valor` DECIMAL(10,2) NOT NULL,
-  `form_pagamento` ENUM("credito", "debito", "pix", "dinheiro") NOT NULL,
-  `estabelecimento_idestabelecimento` INT NOT NULL,
-  PRIMARY KEY (`produtos_idprodutos`, `produtos_categorias_idcategorias`, `clientes_idclientes`, `estabelecimento_idestabelecimento`),
-  INDEX `fk_produtos_has_clientes_clientes1_idx` (`clientes_idclientes` ASC),
-  INDEX `fk_produtos_has_clientes_produtos1_idx` (`produtos_idprodutos` ASC, `produtos_categorias_idcategorias` ASC),
-  INDEX `fk_itens_pedido_estabelecimento1_idx` (`estabelecimento_idestabelecimento` ASC),
-  CONSTRAINT `fk_produtos_has_clientes_produtos1`
-    FOREIGN KEY (`produtos_idprodutos` , `produtos_categorias_idcategorias`)
-    REFERENCES `db_hauster`.`produtos` (`idprodutos` , `categorias_idcategorias`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_produtos_has_clientes_clientes1`
-    FOREIGN KEY (`clientes_idclientes`)
-    REFERENCES `db_hauster`.`clientes` (`idclientes`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_itens_pedido_estabelecimento1`
-    FOREIGN KEY (`estabelecimento_idestabelecimento`)
-    REFERENCES `db_hauster`.`estabelecimento` (`idestabelecimento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando estrutura para tabela db_hauster.itens_pedido
+CREATE TABLE IF NOT EXISTS `itens_pedido` (
+  `id_pedido` int(11) NOT NULL AUTO_INCREMENT,
+  `produtos_idprodutos` int(11) NOT NULL,
+  `dt_pedido` date NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `quantidade` int(11) NOT NULL DEFAULT 1,
+  `form_pagamento` enum('Crédito','Débito','Pix','Dinheiro') NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`id_pedido`),
+  KEY `fk_itens_pedido_estabelecimento1_idx` (`estabelecimento_idestabelecimento`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- Copiando dados para a tabela db_hauster.itens_pedido: ~4 rows (aproximadamente)
+INSERT IGNORE INTO `itens_pedido` (`id_pedido`, `produtos_idprodutos`, `dt_pedido`, `valor`, `quantidade`, `form_pagamento`, `estabelecimento_idestabelecimento`) VALUES
+	(10, 10, '2026-10-07', 99.60, 4, 'Débito', 3),
+	(11, 10, '2026-10-07', 49.80, 2, 'Pix', 3),
+	(12, 6, '2026-10-07', 9000.00, 60, 'Crédito', 3),
+	(13, 9, '2026-10-07', 13.50, 3, 'Dinheiro', 3);
 
--- -----------------------------------------------------
--- Table `db_hauster`.`clientes_has_servicos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_hauster`.`clientes_has_servicos` (
-  `clientes_idclientes` INT NOT NULL AUTO_INCREMENT,
-  `servicos_idservicos` INT NOT NULL,
-  `servicos_funcionarios_idfuncionarios` INT NOT NULL,
-  `servicos_funcionarios_cargos_idcargos` INT NOT NULL,
-  `dt_servico` DATE NOT NULL,
-  `valor` DECIMAL(10,2) NOT NULL,
-  `form_pagamente` ENUM("credito", "debito", "pix", "dinheiro") NOT NULL,
-  PRIMARY KEY (`clientes_idclientes`, `servicos_idservicos`, `servicos_funcionarios_idfuncionarios`, `servicos_funcionarios_cargos_idcargos`),
-  INDEX `fk_clientes_has_servicos_servicos1_idx` (`servicos_idservicos` ASC, `servicos_funcionarios_idfuncionarios` ASC, `servicos_funcionarios_cargos_idcargos` ASC),
-  INDEX `fk_clientes_has_servicos_clientes1_idx` (`clientes_idclientes` ASC),
-  CONSTRAINT `fk_clientes_has_servicos_clientes1`
-    FOREIGN KEY (`clientes_idclientes`)
-    REFERENCES `db_hauster`.`clientes` (`idclientes`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_clientes_has_servicos_servicos1`
-    FOREIGN KEY (`servicos_idservicos` , `servicos_funcionarios_idfuncionarios` , `servicos_funcionarios_cargos_idcargos`)
-    REFERENCES `db_hauster`.`servicos` (`idservicos` , `funcionarios_idfuncionarios` , `funcionarios_cargos_idcargos`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- Copiando estrutura para tabela db_hauster.pets
+CREATE TABLE IF NOT EXISTS `pets` (
+  `idpets` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `idade` int(11) NOT NULL,
+  `especie` varchar(45) NOT NULL,
+  `raca` varchar(45) NOT NULL,
+  `sexo` enum('macho','femea') NOT NULL,
+  `clientes_idclientes` int(11) NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`idpets`,`clientes_idclientes`,`estabelecimento_idestabelecimento`),
+  KEY `fk_pets_clientes1_idx` (`clientes_idclientes`),
+  KEY `fk_pets_estabelecimento1_idx` (`estabelecimento_idestabelecimento`),
+  CONSTRAINT `fk_pets_clientes1` FOREIGN KEY (`clientes_idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pets_estabelecimento1` FOREIGN KEY (`estabelecimento_idestabelecimento`) REFERENCES `estabelecimento` (`idestabelecimento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Copiando dados para a tabela db_hauster.pets: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela db_hauster.produtos
+CREATE TABLE IF NOT EXISTS `produtos` (
+  `idprodutos` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_prod` varchar(45) NOT NULL,
+  `validade` date NOT NULL,
+  `estoque` int(11) NOT NULL,
+  `marca` varchar(45) NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `categorias_idcategorias` int(11) NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`idprodutos`,`categorias_idcategorias`,`estabelecimento_idestabelecimento`),
+  KEY `fk_produtos_categorias1_idx` (`categorias_idcategorias`),
+  KEY `fk_produtos_estabelecimento1_idx` (`estabelecimento_idestabelecimento`),
+  CONSTRAINT `fk_produtos_categorias1` FOREIGN KEY (`categorias_idcategorias`) REFERENCES `categorias` (`idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_produtos_estabelecimento` FOREIGN KEY (`estabelecimento_idestabelecimento`) REFERENCES `estabelecimento` (`idestabelecimento`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Copiando dados para a tabela db_hauster.produtos: ~3 rows (aproximadamente)
+INSERT IGNORE INTO `produtos` (`idprodutos`, `nome_prod`, `validade`, `estoque`, `marca`, `preco`, `categorias_idcategorias`, `estabelecimento_idestabelecimento`) VALUES
+	(6, 'Ração seca supreme', '2027-05-25', 140, 'Golden', 150.00, 1, 3),
+	(7, 'Shampoo para Cães', '2026-11-09', 3, 'Pet Society', 24.90, 5, 3),
+	(8, 'Perfume Pet', '2026-12-30', 50, 'Ibasa', 19.90, 3, 3),
+	(9, 'Sachê para Gatos', '2026-11-25', 2, 'Whiskas', 4.50, 1, 3),
+	(10, 'Corda para Cães', '2027-01-04', 8, 'Chalesco', 24.90, 2, 3);
+
+-- Copiando estrutura para tabela db_hauster.servicos
+CREATE TABLE IF NOT EXISTS `servicos` (
+  `idservicos` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `tempo_estimado` time NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `funcionarios_idfuncionarios` int(11) NOT NULL,
+  `funcionarios_cargos_idcargos` int(11) NOT NULL,
+  `estabelecimento_idestabelecimento` int(11) NOT NULL,
+  PRIMARY KEY (`idservicos`,`funcionarios_idfuncionarios`,`funcionarios_cargos_idcargos`,`estabelecimento_idestabelecimento`),
+  KEY `fk_servicos_funcionarios1_idx` (`funcionarios_idfuncionarios`,`funcionarios_cargos_idcargos`),
+  KEY `fk_servicos_estabelecimento1_idx` (`estabelecimento_idestabelecimento`),
+  CONSTRAINT `fk_servicos_estabelecimento1` FOREIGN KEY (`estabelecimento_idestabelecimento`) REFERENCES `estabelecimento` (`idestabelecimento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_servicos_funcionarios1` FOREIGN KEY (`funcionarios_idfuncionarios`, `funcionarios_cargos_idcargos`) REFERENCES `funcionarios` (`idfuncionarios`, `cargos_idcargos`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- Copiando dados para a tabela db_hauster.servicos: ~0 rows (aproximadamente)
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
