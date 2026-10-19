@@ -1,0 +1,253 @@
+/* =====================================================================
+   RESPONSIVIDADE: LOGIN, CADASTRO, PLANOS E PAGAMENTO
+   ---------------------------------------------------------------------
+   Arquivo extra, só com media queries: não altera nenhum CSS/HTML
+   existente. Carregado por último no <head> de login.php, index.php,
+   planos.php e pagamento.php (no pagamento, depois do Bootstrap).
+
+   Cada bloco só atua nas telas que têm aquelas classes, então o mesmo
+   arquivo serve para as quatro páginas.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   LOGIN e CADASTRO  (css/style.css)
+   Layout original: logo à esquerda (70vh) + formulário à direita, com
+   inputs de 500px fixos. Abaixo de 1024px o logo vai pro topo e o
+   formulário ocupa a largura toda.
+   --------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        min-height: 100vh;
+    }
+
+    .area-logo {
+        width: 100%;
+        height: auto;
+        padding: 28px 16px;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .area-logo > a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .area-logo img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100px;
+    }
+
+    .area-form {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        flex: 1;
+        padding: 32px 20px 40px;
+        gap: 28px;
+    }
+
+    .area-form form {
+        display: flex; 
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .inputs > input,
+    .botao-form > input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .area-logo {
+        padding: 20px 10px;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .area-logo img {
+        max-height: 150px;
+    }
+
+    .area-form {
+        padding: 24px 16px 32px;
+        gap: 22px;
+    }
+
+    .area-form h1 {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   CABEÇALHO de PLANOS e PAGAMENTO  (css/planos.css e css/pagamento.css)
+   O original usa padding de 7rem em volta do logo e margin-right de 50px
+   no botão, o que empurra tudo pra fora da tela no celular.
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    header {
+        height: auto;
+        min-height: 80px;
+    }
+
+    header .menu {
+        padding: 12px 16px;
+    }
+
+    header .counteiner-logo {
+        margin: 0;
+        padding: 0;
+    }
+
+    header .logo {
+        width: 140px;
+    }
+
+    header .botoes {
+        margin-right: 0;
+    }
+
+    header .botao-header {
+        padding: 7px 20px;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   PLANOS  (css/planos.css)
+   3 cards de 400px lado a lado -> encolhem até 1300px e empilham
+   abaixo de 900px.
+   --------------------------------------------------------------------- */
+@media (max-width: 1300px) {
+    .cards-planos {
+        width: 100%;
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .card-planos {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto;
+        height: auto;
+        min-height: 30rem;
+    }
+
+    .botao-planos > a {
+        padding: 5px 16px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .planos {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        padding: 32px 16px;
+    }
+
+    .cards-planos {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
+        padding: 0;
+        gap: 24px;
+    }
+
+    .card-planos {
+        flex: none;
+        width: 100%;
+        max-width: 420px;
+        min-height: 0;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .big-div {
+        grid-template-columns: 1fr;
+        grid-template-areas: "input";
+        gap: 0;
+        /* espaço pra barra fixa não cobrir o final da página */
+        padding-bottom: 80px;
+    }
+
+    .pagamento {
+        padding: 0 16px;
+    }
+
+    /* Barra fixa no rodapé */
+    .aside {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        margin: 0;
+        padding: 10px 12px;
+        border-radius: 0;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+
+        /* tudo em uma linha: valor à esquerda, botões à direita */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    /* Esconde o título "Resumo do pedido" */
+    .aside h1 {
+        display: none;
+    }
+
+    .aside .aside-conteudo {
+        width: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .aside .aside-conteudo p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    /* Mostra só o "Valor total" (esconde o Item e o Valor mensal) */
+    .aside .aside-conteudo p:nth-child(1),
+    .aside .aside-conteudo p:nth-child(2) {
+        display: none;
+    }
+
+    /* Botões Cancelar e Concluir lado a lado */
+    .aside .botoes-aside {
+        display: flex;
+        flex-direction: row-reverse; /* Concluir fica por último (à direita) */
+        gap: 8px;
+        width: auto;
+        padding: 0;
+        margin: 0;
+    }
+
+    .aside .botoes-aside > a {
+        width: auto;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        text-align: center;
+        margin: 0;
+    }
+}

@@ -1,0 +1,449 @@
+@media (max-width: 1540px) {
+    body.dashboard .form-produto {
+        width: min(100%, 780px);
+        height: auto;
+    }
+
+    body.dashboard .form-produto .campos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+    }
+
+    body.dashboard .form-produto .campo > input,
+    body.dashboard .form-produto .campo > select,
+    body.dashboard .form-produto .campo > label {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    body.dashboard .form-produto .acoes {
+        width: 100%;
+        gap: 20px;
+    }
+
+    body.dashboard .form-produto .acoes > button,
+    body.dashboard .form-produto .acoes > a {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 300px;
+    }
+
+    body.dashboard .form-produto .acoes > a > button {
+        width: 100%;
+    }
+
+    body.dashboard .form-produto .acoes > button {
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   TABELAS (home, produtos, pedidos)
+   Em vez de espremer 8 colunas, a tabela rola na horizontal dentro do
+   próprio card. Funciona sem mexer no HTML: o <table> vira um "scroller"
+   e o <tbody> faz o papel da tabela.
+   --------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+    /* sem isso a tabela larga empurra a coluna do grid pra fora da tela */
+    body.dashboard {
+        grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    body.dashboard .content {
+        min-width: 0;
+    }
+
+    body.dashboard .table-sb {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    body.dashboard .table-sb > tbody {
+        display: table;
+        width: 100%;
+        min-width: 760px;
+        table-layout: auto;
+    }
+
+    body.dashboard .table-sb th,
+    body.dashboard .table-sb td {
+        white-space: nowrap;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   CELULAR E TABLET EM PÉ
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+
+    body.dashboard {
+        --topo-h: 64px;   /* altura da barra do topo */
+        --nav-h: 64px;    /* altura da barra de menu inferior */
+
+        display: block;   /* sai do grid de 2 colunas (sidebar + conteúdo) */
+        height: auto;
+        min-height: 100vh;
+        padding: var(--topo-h) 0 calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
+    }
+
+    /* ---------- MENU: barra inferior só com ícones ---------- */
+    body.dashboard .sidebar {
+        display: flex;              /* o CSS original esconde a sidebar aqui */
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0;
+
+        position: fixed;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        width: 100%;
+        height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    body.dashboard .sidebar .container:not(.logo) {
+        flex: 1;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 2px;
+
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 6px 8px;
+    }
+
+    body.dashboard .sidebar .container:not(.logo) a {
+        flex: 1 1 0;
+        min-width: 0;
+        max-width: 64px;
+        width: auto;
+        height: 100%;
+
+        justify-content: center;
+        gap: 0;
+        padding: 0;
+
+        font-size: 0; 
+        line-height: 0;
+    }
+
+    body.dashboard .sidebar .container:not(.logo) a .material-symbols-outlined {
+        font-size: 26px;   /* o ícone continua visível */
+        line-height: 1;
+    }
+
+    /* ---------- LOGO: vira o favicon.png, fixo no canto do topo ---------- */
+    body.dashboard .sidebar .container.logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: var(--topo-h);
+        max-width: none;
+        height: var(--topo-h);
+        margin: 0;
+        padding: 10px;
+        border: 0;         /* tira o border-right herdado de .logo */
+
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        z-index: 1001;
+    }
+
+    body.dashboard .sidebar .container.logo a {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        justify-content: center;
+    }
+
+    body.dashboard .sidebar .container.logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: none;
+        object-position: -9999px 0;
+        background: url("../assets/favicon.png") center / contain no-repeat;
+    }
+
+    /* ---------- TOPO: fixo, com espaço pro favicon à esquerda ---------- */
+    body.dashboard .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--topo-h);
+        z-index: 900;
+
+        gap: 10px;
+        padding: 0 12px 0 calc(var(--topo-h) + 4px);
+    }
+
+    body.dashboard .topbar h1 {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+        font-size: 1.15rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* o Bootstrap usa !important em mt-3 e p-3, por isso o !important aqui */
+    body.dashboard .perfil-menu {
+        flex: none;
+        margin-top: 0 !important;
+    }
+
+    body.dashboard .perfil-menu .select {
+        padding: 6px 8px !important;
+    }
+
+    body.dashboard .topbar .user img {
+        width: 34px;
+        height: 34px;
+        object-fit: cover;
+    }
+
+    /* ---------- CONTEÚDO ---------- */
+    body.dashboard .content {
+        min-width: 0;
+        padding: 1rem;
+    }
+
+    body.dashboard main.content {
+        margin: 12px 10px;
+    }
+
+    /* card de tabela dentro da home */
+    body.dashboard main.content > .tabela {
+        margin: 1rem 0 0;
+        height: auto;
+    }
+
+    body.dashboard .titulo {
+        font-size: 1.5rem;
+    }
+
+    /* cabeçalho das listas (título + botões) empilhado */
+    body.dashboard .cabecalho-tabela {
+        flex-direction: column;
+        align-items: stretch;
+        height: auto;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    body.dashboard .cabecalho-tabela > div {
+        flex-wrap: wrap;
+    }
+
+    body.dashboard .btn-cadastrar {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+
+    /* cards da home */
+    body.dashboard .card-sb {
+        min-height: 0;
+    }
+
+    body.dashboard .card-sb h1 {
+        font-size: 1.25rem;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   CELULAR: 1 coluna
+   --------------------------------------------------------------------- */
+@media (max-width: 700px) {
+    body.dashboard .cards-sb {
+        min-width: 220px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    body.dashboard .form-produto {
+        margin: 16px auto 8px;
+        padding: 16px;
+    }
+
+    body.dashboard .form-produto .campos {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    body.dashboard .form-produto .campo > input,
+    body.dashboard .form-produto .campo > select,
+    body.dashboard .form-produto .campo > label {
+        max-width: none;
+    }
+
+    /* botões Salvar/Cancelar empilhados, largura total */
+    body.dashboard .form-produto .acoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    body.dashboard .form-produto .acoes > button,
+    body.dashboard .form-produto .acoes > a {
+        flex: none;
+        max-width: none;
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   CELULAR PEQUENO
+   --------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    body.dashboard .topbar h1 {
+        font-size: 1.05rem;
+    }
+
+    /* some o nome/cargo, fica só o avatar */
+    body.dashboard .topbar .user > div {
+        display: none;
+    }
+
+    body.dashboard .content {
+        padding: 0.75rem;
+    }
+
+    body.dashboard main.content {
+        margin: 10px 8px;
+    }
+
+    body.dashboard .titulo {
+        font-size: 1.3rem;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   TABELAS: ESCONDER COLUNAS MENOS IMPORTANTES EM TELA PEQUENA
+   Sem mexer no HTML: as tabelas são identificadas pela quantidade de
+   colunas (8 = home e produtos | 6 = pedidos). A linha "Nenhum registro"
+   (td com colspan) nunca é escondida.
+
+   Tabela de 8 colunas: ID | Nome | Marca | Categoria | Preço | Validade | Estoque | Ações
+   Tabela de 6 colunas: ID | Produto | Valor | Data | Forma de pagamento | Ações
+   --------------------------------------------------------------------- */
+@media (max-width: 900px) {
+    /* o scroll horizontal deixa de ser necessário: as colunas se ajustam */
+    body.dashboard .table-sb > tbody {
+        min-width: 0;
+    }
+
+    body.dashboard .table-sb th,
+    body.dashboard .table-sb td {
+        white-space: normal;
+        padding: 8px 6px;
+    }
+
+    body.dashboard .table-sb th:last-child,
+    body.dashboard .table-sb td:last-child {
+        width: auto;
+    }
+
+    /* botões de ação com largura automática (o original fixa 70px e corta o texto) */
+    body.dashboard .table-sb .acoes > button,
+    body.dashboard .table-sb .acoes > a > button {
+        width: auto;
+        padding: 5px 10px;
+    }
+
+    /* 8 colunas: esconde Marca e Categoria */
+    body.dashboard .table-sb:has(th:nth-child(8)) :is(th, td):not([colspan]):is(:nth-child(3), :nth-child(4)) {
+        display: none;
+    }
+
+    /* 6 colunas: esconde Forma de pagamento */
+    body.dashboard .table-sb:has(th:nth-child(6)):not(:has(th:nth-child(7))) :is(th, td):not([colspan]):nth-child(5) {
+        display: none;
+    }
+}
+
+@media (max-width: 680px) {
+    /* 8 colunas: esconde também ID e Validade (sobra Nome, Preço, Estoque, Ações) */
+    body.dashboard .table-sb:has(th:nth-child(8)) :is(th, td):not([colspan]):is(:nth-child(1), :nth-child(6)) {
+        display: none;
+    }
+
+    /* 6 colunas: esconde também o ID (sobra Produto, Valor, Data, Ações) */
+    body.dashboard .table-sb:has(th:nth-child(6)):not(:has(th:nth-child(7))) :is(th, td):not([colspan]):nth-child(1) {
+        display: none;
+    }
+
+    /* botões de ação mais compactos */
+    body.dashboard .table-sb .acoes {
+        gap: 4px;
+    }
+
+    body.dashboard .table-sb .acoes > button,
+    body.dashboard .table-sb .acoes > a > button {
+        width: auto;
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+
+    body.dashboard .table-sb .estoque,
+    body.dashboard .table-sb button.estoque,
+    body.dashboard .table-sb .estoque > button {
+        width: auto;
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* celulares: tira também o Preço (8 colunas) e a Data (6 colunas) */
+    body.dashboard .table-sb:has(th:nth-child(8)) :is(th, td):not([colspan]):nth-child(5),
+    body.dashboard .table-sb:has(th:nth-child(6)):not(:has(th:nth-child(7))) :is(th, td):not([colspan]):nth-child(4) {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    /* compacta mais para a coluna de Ações caber inteira */
+    body.dashboard .table-sb th,
+    body.dashboard .table-sb td {
+        padding: 6px 3px;
+        font-size: 0.85rem;
+    }
+
+    body.dashboard .table-sb .acoes {
+        gap: 3px;
+    }
+
+    body.dashboard .table-sb .acoes > button,
+    body.dashboard .table-sb .acoes > a > button,
+    body.dashboard .table-sb .estoque,
+    body.dashboard .table-sb .estoque > button {
+        padding: 4px 6px;
+        font-size: 0.72rem;
+    }
+
+    body.dashboard main.content > .tabela {
+        padding: 6px;
+    }
+
+    body.dashboard main.tabela.content {
+        padding: 0.5rem;
+    }
+}
