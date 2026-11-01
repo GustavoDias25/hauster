@@ -1,8 +1,4 @@
 <main class="content">
-  <div class="painel">
-
-    <!-- COLUNA DA ESQUERDA: 3 cards + tabela -->
-    <div class="coluna-principal">
     <div class="cards-sb">
         <div class="card-sb">
             <h1>Receita do último mês</h1>
@@ -34,14 +30,14 @@
             <th class="celulas">Estoque</th>
             <th class="celulas" id="th_acoes">Ações</th>
         </tr>
-        <tr class="linha">
+        <tr class="linha">  
         <td class="celulas">1</td>
         <td class="celulas">Ração Seca Suprema</td>
         <td class="celulas">Golden</td>
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -60,7 +56,7 @@
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -79,7 +75,7 @@
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -98,7 +94,7 @@
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -117,7 +113,7 @@
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -136,7 +132,83 @@
         <td class="celulas">Ração</td>
         <td class="celulas destaque">R$50,00</td>
         <td class="celulas destaque">25/05/2027</td>
-        <td class="estoque"><button>Alto</button></td>
+        <td class="estoque destaque">Alto</td>
+        <td class="celulas">
+                <div class="acoes">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon editar">edit_square</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined icon excluir">delete</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr class="linha">
+        <td class="celulas">1</td>
+        <td class="celulas">Ração Seca Suprema</td>
+        <td class="celulas">Golden</td>
+        <td class="celulas">Ração</td>
+        <td class="celulas destaque">R$50,00</td>
+        <td class="celulas destaque">25/05/2027</td>
+        <td class="estoque destaque">Alto</td>
+        <td class="celulas">
+                <div class="acoes">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon editar">edit_square</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined icon excluir">delete</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr class="linha">
+        <td class="celulas">1</td>
+        <td class="celulas">Ração Seca Suprema</td>
+        <td class="celulas">Golden</td>
+        <td class="celulas">Ração</td>
+        <td class="celulas destaque">R$50,00</td>
+        <td class="celulas destaque">25/05/2027</td>
+        <td class="estoque destaque">Alto</td>
+        <td class="celulas">
+                <div class="acoes">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon editar">edit_square</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined icon excluir">delete</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr class="linha">
+        <td class="celulas">1</td>
+        <td class="celulas">Ração Seca Suprema</td>
+        <td class="celulas">Golden</td>
+        <td class="celulas">Ração</td>
+        <td class="celulas destaque">R$50,00</td>
+        <td class="celulas destaque">25/05/2027</td>
+        <td class="estoque destaque">Alto</td>
+        <td class="celulas">
+                <div class="acoes">
+                    <a href="#">
+                        <span class="material-symbols-outlined icon editar">edit_square</span>
+                    </a>
+                    <a href="#">
+                        <span class="material-symbols-outlined icon excluir">delete</span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr class="linha">
+        <td class="celulas">1</td>
+        <td class="celulas">Ração Seca Suprema</td>
+        <td class="celulas">Golden</td>
+        <td class="celulas">Ração</td>
+        <td class="celulas destaque">R$50,00</td>
+        <td class="celulas destaque">25/05/2027</td>
+        <td class="estoque destaque">Alto</td>
         <td class="celulas">
                 <div class="acoes">
                     <a href="#">
@@ -150,23 +222,4 @@
         </tr>
     </table>
     </div>
-    </div>
-
-    <!-- COLUNA DA DIREITA: 3 cards -->
-    <aside class="coluna-lateral">
-        <div class="card-sb" id="">
-            <h1>Produto mais vendido:</h1>
-            <p>Ração seca</p>
-        </div>
-        <div class="card-sb" id="">
-            <h1>Funcionário que mais vendeu no mês:</h1>
-            <p>Pedro Lucas</p>
-        </div>
-        <div class="card-sb" id="">
-            <h1>Cliente que mais comprou durante o mês:</h1>
-            <p>Júlia Beatriz</p>
-        </div>
-    </aside>
-
-  </div>
 </main>

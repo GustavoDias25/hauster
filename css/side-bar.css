@@ -233,6 +233,10 @@ html, body {
     background-color: var(--cinza-100);
 }
 
+.collapsing {
+    transition: height .35s ease !important;
+}
+
 /* MAIN CONTENT */
 
 .content {

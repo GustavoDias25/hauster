@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/* Editar perfil: cada assunto é um bloco, com os blocos em 2 colunas */
+
+.perfil-pagina {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.perfil-titulo {
+    margin-bottom: 1.5rem;
+    color: var(--cinza-600);
+}
+
+/* Os blocos ficam em 2 colunas */
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.perfil-secao {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+    background-color: var(--branco);
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.perfil-secao-info {
+    width: 100%;
+}
+
+.perfil-secao-info h3 {
+    margin-bottom: 5px;
+    color: var(--secundaria-base);
+}
+
+.perfil-secao-info p {
+    font-size: 0.85rem;
+    color: var(--cinza-400);
+}
+
+.perfil-secao-campos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Foto + botão de escolher arquivo lado a lado */
+.perfil-foto-linha {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.perfil-foto {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--primaria-base);
+}
+
+.perfil-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.perfil-campo label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--cinza-500);
+}
+
+.perfil-campo input,
+.perfil-campo select {
+    padding: 10px;
+    border: 1px solid var(--cinza-200);
+    border-radius: 8px;
+    background-color: var(--branco);
+}
+
+.perfil-campo input:focus,
+.perfil-campo select:focus {
+    outline: none;
+    border-color: var(--primaria-base);
+}
+
+/* Barra de botões no final, alinhada à direita */
+.perfil-barra {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.perfil-barra button,
+.perfil-barra a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: 2px solid var(--primaria-base);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.perfil-salvar {
+    background-color: var(--primaria-base);
+    color: var(--branco);
+}
+
+.perfil-salvar:hover {
+    background-color: var(--primaria-400);
+}
+
+.perfil-cancelar {
+    background-color: var(--branco);
+    color: var(--primaria-base);
+}
+
+.perfil-cancelar:hover {
+    text-decoration: underline;
+}

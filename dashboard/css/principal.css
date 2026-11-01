@@ -17,15 +17,16 @@
     --secundaria-700: #211500;
     --secundaria-hover: #e4a404;    
     --cinza-100: #F0F0F0;
+    --cinza-linha: #ededed60;
     --cinza-200: #B3B8BB;
     --cinza-base: #8E9294;
     --cinza-400: #6A6D6F;
     --cinza-500: #494B4C;
     --cinza-600: #2A2B2C;
     --cinza-700: #101111;
-    --estoque-alto: #6CD486;
-    --estoque-medio: #FFCE52;
-    --estoque-baixo: #FF6366;
+    --estoque-alto: #00B52E;
+    --estoque-medio: #030303;
+    --estoque-baixo: #FF0000;
     --excluir: #FF383C;
     --excluir-hover: #d32c2f;
     --font: "Inter";
@@ -52,7 +53,6 @@
 .card-sb {
     background: var(--secundaria-base);
     color: var(--branco);
-    height: 100%;
     
     padding: 1rem;
     
@@ -63,10 +63,6 @@
     0 4px 12px rgba(0, 0, 0, 0.04);
     
     min-height: 140px;
-}
-
-.card-lateral{
-    background-color: var(--primaria-base);
 }
 
 .tabela{
@@ -110,7 +106,7 @@ td{
 }
 
 tr:nth-child(even){
-    background-color: var(--primaria-100);
+    background-color: var(--cinza-linha);
     color: var(--preto);
 }
 
@@ -139,17 +135,15 @@ th:last-child, td:last-child{
     width: 180px;
 }
 
-.estoque > button{
-    background-color: var(--estoque-alto);
-    color:var(--branco);
+.estoque{
+    color: var(--estoque-alto);
     padding: 5px 15px;
     width: 70px;
-    font-weight: bold;
     border-radius: 7px;
 }
 
 .editar{
-    color: var(--preto);
+    color: var(--secundaria-base);
     cursor: pointer;
 }
 
@@ -158,7 +152,7 @@ th:last-child, td:last-child{
 }
 
 .excluir{
-    color: var(--preto);
+    color: var(--excluir);
     cursor: pointer;
 }
 
@@ -169,67 +163,4 @@ th:last-child, td:last-child{
 .destaque{
     font-weight: bold;
     font-style: italic;
-}
-
-
-.painel {
-    display: grid;
-    grid-template-columns: 1fr 260px; 
-    gap: 3rem;
-}
-
-.coluna-principal {
-    display: grid;
-    grid-template-rows: 155px 1fr;
-    gap: 3.5rem;
-}
-
-.coluna-lateral {
-    display: grid;
-    grid-template-rows: 155px 1fr 1fr;
-    gap: 3.5rem;
-}
-
-.cards-sb {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-}
-
-.coluna-principal .tabela {
-    height: auto;
-    margin-top: 0;
-    padding: 20px 30px;
-}
-
-.card-sb h1 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-}
-
-.card-sb p:first-of-type {
-    font-size: 2rem; 
-    margin-bottom: 0.5rem;
-}
-
-.card-sb p:last-of-type {
-    font-size: 0.8rem;
-}
-
-.coluna-lateral .card-sb p {
-    font-size: 2rem;
-}
-
-@media (max-width: 1000px) {
-    .painel,
-    .coluna-principal,
-    .coluna-lateral {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 1rem;
-    }
-
-    .cards-sb {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
 }

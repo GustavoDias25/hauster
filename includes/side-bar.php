@@ -1,37 +1,46 @@
 <?php
-$grupo_ativo = match (true) {
-    str_starts_with($pagina, 'produtos') => 'produtos',
-    default => $pagina,
-};
+include_once "includes/permissoes.php";
+
+// Mantém o item do menu marcado nas subpáginas (pedidos_cadastrar -> pedidos, etc.)
+$grupo_ativo = secao_da_pagina($pagina);
+
+// secao => [ícone, texto]
+$menu = [
+    'home'         => ['home', 'Dashboard'],
+    'produtos'     => ['local_mall', 'Produtos'],
+    'pedidos'      => ['attach_money', 'Vendas'],
+    'funcionarios' => ['group', 'Funcionários'],
+    'pets'         => ['pets', 'Pets'],
+    'clientes'     => ['groups', 'Clientes'],
+    'servicos'     => ['assignment', 'Serviços'],
+];
 ?>
+<style>
+    /* Item do menu que o cargo não pode acessar */
+    .sidebar a.desativado {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
 <aside class="sidebar">
     <div class="container logo">
-        <a href="index.html">
+        <a href="dashboard.php?pagina=<?= pode_acessar('home') ? 'home' : '' ?>">
             <img src="assets/Logo-hauster.png" alt="Logo Hauster">
         </a>
     </div>
 
     <div class="container">
-        <a href="dashboard.php?pagina=home" class="<?= $grupo_ativo === 'home' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">home</span> Dashboard
-        </a>
-        <a href="dashboard.php?pagina=produtos" class="<?= $grupo_ativo === 'produtos' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">local_mall</span> Produtos
-        </a>
-        <a href="dashboard.php?pagina=pets" class="<?= $grupo_ativo === 'pets' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">pets</span> Pets
-        </a>
-        <a href="dashboard.php?pagina=clientes" class="<?= $grupo_ativo === 'clientes' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">groups</span> Clientes
-        </a>
-        <a href="dashboard.php?pagina=funcionarios" class="<?= $grupo_ativo === 'funcionarios' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">group</span> Funcionários
-        </a>
-        <a href="dashboard.php?pagina=servicos" class="<?= $grupo_ativo === 'servicos' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">assignment</span> Serviços
-        </a>
-        <a href="dashboard.php?pagina=pedidos" class="<?= $grupo_ativo === 'pedidos' ? 'active' : '' ?>">
-            <span class="material-symbols-outlined">attach_money</span> Vendas
-        </a>
+        <?php foreach ($menu as $secao => [$icone, $texto]): ?>
+            <?php if (pode_acessar($secao)): ?>
+                <a href="dashboard.php?pagina=<?= $secao ?>" class="<?= $grupo_ativo === $secao ? 'active' : '' ?>">
+                    <span class="material-symbols-outlined"><?= $icone ?></span> <?= $texto ?>
+                </a>
+            <?php else: ?>
+                <a class="desativado" aria-disabled="true" tabindex="-1">
+                    <span class="material-symbols-outlined"><?= $icone ?></span> <?= $texto ?>
+                </a>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 </aside>

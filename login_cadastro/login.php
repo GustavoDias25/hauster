@@ -10,15 +10,14 @@
         <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Iceberg&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <!-- Responsividade (carregar por último) -->
     <link rel="stylesheet" href="css/responsivo.css">
 </head>
 <body>
         <main class="area-logo">
               <picture>
-                     <source media="(max-width: 1024px)" srcset="../assets/Logo-hauster.png">
-                     <source media="(max-width: 600px)" srcset="../assets/favicon.png">
-                     <img src="../assets/logo-vertical.png" alt="Descrição da imagem">
+                     <a href="../index.html"><source media="(max-width: 1024px)" srcset="../assets/Logo-hauster.png"></a>
+                     <a href="../index.html"><source media="(max-width: 600px)" srcset="../assets/favicon.png"></a>
+                     <a href="../index.html"><img src="../assets/logo-vertical.png" alt="Descrição da imagem"></a>
                 </picture>
         </main>
         <section class="area-form">
@@ -31,7 +30,7 @@
 
             <form action="logar.php" method="post">
                 <div class="inputs">
-                    <input type="text" name="CNPJ" id="CNPJ" placeholder="Digite seu CNPJ">
+                    <input type="email" name="email" id="email" placeholder="Digite seu email">
                 </div>
                 <div class="inputs" >
                     <input type="password" name="senha" id="senha" placeholder="Digite sua senha">

@@ -40,15 +40,20 @@ if($senha != $conf_senha){
 }
 
 try {
+    // planos_idplanos é obrigatório no banco: começa no primeiro plano
+    // e é trocado quando a pessoa escolhe e conclui em planos.php / pagamento.php
+    $plano_inicial = $conexao->query('SELECT MIN(idplanos) FROM planos')->fetchColumn();
+
     $stmt = $conexao->prepare(
-        'INSERT INTO `db_hauster`.`estabelecimento` (`nome_fantasia`, `cnpj`, `email`, `senha`, `foto`) 
-         VALUES (:nome, :cnpj, :email, :senha, :foto)'
+        'INSERT INTO estabelecimento (nome_fantasia, cnpj, email, senha, foto, planos_idplanos) 
+         VALUES (:nome, :cnpj, :email, :senha, :foto, :plano)'
     );
     $stmt->bindParam(':nome', $nome);
     $stmt->bindParam(':cnpj', $cnpj);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':senha', $senha_hash);
     $stmt->bindParam(':foto', $foto_nome);
+    $stmt->bindParam(':plano', $plano_inicial);
     $stmt->execute();
 
     $_SESSION['estabelecimento_id'] = $conexao->lastInsertId();

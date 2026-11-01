@@ -14,15 +14,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $valor          = str_replace(',', '.', $_POST['valor']);
     $quantidade     = (int) $_POST['quantidade'];
     $form_pagamento = trim($_POST['forma_pagamento']);
+    $funcionario_id = (int) ($_POST['funcionario_id'] ?? 0);
 
     try {
+        // Só dono/gerente troca o funcionário da venda; os demais mantêm o que já estava
+        if (!e_gerente()) {
+            $stmtAtual = $conexao->prepare(
+                "SELECT funcionarios_idfuncionarios FROM itens_pedido
+                 WHERE id_pedido = :id AND estabelecimento_idestabelecimento = :estab"
+            );
+            $stmtAtual->execute([':id' => $id, ':estab' => $estabelecimento_id]);
+            $funcionario_id = (int) $stmtAtual->fetchColumn();
+        }
+
+        // O funcionário escolhido precisa ser deste estabelecimento
+        $stmtFunc = $conexao->prepare(
+            "SELECT COUNT(*) FROM funcionarios
+             WHERE idfuncionarios = :id AND estabelecimento_idestabelecimento = :estab"
+        );
+        $stmtFunc->execute([':id' => $funcionario_id, ':estab' => $estabelecimento_id]);
+        if ($stmtFunc->fetchColumn() == 0) {
+            throw new Exception('Selecione o funcionário que realizou a venda.');
+        }
+
         $sql = "UPDATE itens_pedido
                 SET produtos_idprodutos = :id_prod, dt_pedido = :dt_pedido,
-                    valor = :valor, quantidade = :quantidade, form_pagamento = :form_pagamento
+                    valor = :valor, quantidade = :quantidade, form_pagamento = :form_pagamento,
+                    funcionarios_idfuncionarios = :funcionario_id
                 WHERE id_pedido = :id_pedido
                   AND estabelecimento_idestabelecimento = :estab";
         $stmt = $conexao->prepare($sql);
         $stmt->execute([
+            ':funcionario_id' => $funcionario_id,
             ':id_prod'        => $id_prod,
             ':dt_pedido'      => $dt_pedido,
             ':valor'          => $valor,
@@ -34,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header('Location: dashboard.php?pagina=pedidos');
         exit;
-    } catch (PDOException $e) {
+    } catch (Exception $e) { // PDOException também é Exception
         $erro = 'Erro ao atualizar pedido: ' . $e->getMessage();
     }
 
@@ -71,6 +94,15 @@ $stmt3 = $conexao->prepare(
 );
 $stmt3->execute([':estab' => $estabelecimento_id]);
 $produtos = $stmt3->fetchAll();
+
+// Funcionários para o select
+$stmtFuncionarios = $conexao->prepare(
+    "SELECT idfuncionarios, nome FROM funcionarios
+     WHERE estabelecimento_idestabelecimento = :estab
+     ORDER BY nome"
+);
+$stmtFuncionarios->execute([':estab' => $estabelecimento_id]);
+$funcionarios = $stmtFuncionarios->fetchAll();
 ?>
 <main class="tabela content fundo">
     <h1 class="titulo">Editar produto</h1>
@@ -133,6 +165,21 @@ $produtos = $stmt3->fetchAll();
                     </option>
                 </select>
             </div>
+
+            <?php if (e_gerente()): ?>
+            <div class="campo">
+                <label for="funcionario_id">Funcionário</label>
+                <select name="funcionario_id" id="funcionario_id" required>
+                    <option value="">Quem realizou a venda</option>
+                    <?php foreach ($funcionarios as $func): ?>
+                        <option value="<?= $func['idfuncionarios'] ?>"
+                            <?= $func['idfuncionarios'] == $pedido['funcionarios_idfuncionarios'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($func['nome']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <?php endif; ?>
 
             <div class="acoes campo">
                 <button type="submit">Salvar alterações</button>

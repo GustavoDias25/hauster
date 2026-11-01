@@ -1,12 +1,12 @@
 @media (max-width: 1540px) {
     body.dashboard .form-produto {
-        width: min(100%, 780px);
+        width: min(100%, 700px);
         height: auto;
     }
 
     body.dashboard .form-produto .campos {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        justify-content: stretch;
+        grid-template-columns: repeat(2, minmax(0, 300px));
+        justify-content: center;
     }
 
     body.dashboard .form-produto .campo > input,
@@ -258,6 +258,7 @@
     /* cards da home */
     body.dashboard .card-sb {
         min-height: 0;
+        width: 100%;
     }
 
     body.dashboard .card-sb h1 {
@@ -272,8 +273,9 @@
 @media (max-width: 700px) {
     body.dashboard .cards-sb {
         min-width: 220px;
+        height: 30vh;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 
     body.dashboard .form-produto {
@@ -304,6 +306,7 @@
         flex: none;
         max-width: none;
         width: 100%;
+        grid-column: 1;
     }
 }
 
@@ -445,5 +448,23 @@
 
     body.dashboard main.tabela.content {
         padding: 0.5rem;
+    }
+}
+
+/* Editar perfil: em tela pequena os blocos ficam em 1 coluna */
+@media (max-width: 800px) {
+    body.dashboard .perfil-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.dashboard .perfil-secao {
+        padding: 20px;
+    }
+
+    body.dashboard .perfil-barra button,
+    body.dashboard .perfil-barra a {
+        
+        flex: 1;
+        text-align: center;
     }
 }

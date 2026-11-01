@@ -2,9 +2,12 @@
 $estabelecimento_id = $_SESSION['estabelecimento_id'];
 
 $stmt = $conexao->prepare(
-    "SELECT ip.id_pedido, ip.dt_pedido, ip.valor, ip.produtos_idprodutos, ip.form_pagamento, p.idprodutos, p.nome_prod as produto
-     FROM itens_pedido ip, produtos p 
-     WHERE p.idprodutos = ip.produtos_idprodutos and ip.estabelecimento_idestabelecimento = :estabelecimento_id ORDER BY ip.id_pedido"
+    "SELECT ip.id_pedido, ip.dt_pedido, ip.valor, ip.produtos_idprodutos, ip.form_pagamento, p.idprodutos, p.nome_prod as produto,
+            f.nome AS funcionario
+     FROM itens_pedido ip
+     JOIN produtos p ON p.idprodutos = ip.produtos_idprodutos
+     LEFT JOIN funcionarios f ON f.idfuncionarios = ip.funcionarios_idfuncionarios
+     WHERE ip.estabelecimento_idestabelecimento = :estabelecimento_id ORDER BY ip.id_pedido"
 );
 $stmt->bindParam(':estabelecimento_id', $estabelecimento_id);
 $stmt->execute();
@@ -34,6 +37,7 @@ $pedidos = $stmt->fetchAll();
             <th class="celulas">Data do pedido</th>
             <th class="celulas">Valor do pedido</th>
             <th class="celulas">Forma de pagamento</th>
+            <th class="celulas">Funcionário</th>
             <th class="celulas">Ações</th>
         </tr>
 
@@ -45,6 +49,7 @@ $pedidos = $stmt->fetchAll();
                     <td class="celulas"><?= date('d/m/Y', strtotime($pedido['dt_pedido'])) ?></td>
                     <td class="celulas destaque"><?= htmlspecialchars($pedido['valor']) ?></td>
                     <td class="celulas destaque"><?= htmlspecialchars($pedido['form_pagamento']) ?></td>
+                    <td class="celulas"><?= htmlspecialchars($pedido['funcionario'] ?? '—') ?></td>
                     <td class="celulas">
                         <div class="acoes">
                             <a href="dashboard.php?pagina=pedidos_editar&id_pedido=<?= $pedido['id_pedido'] ?>">
@@ -60,7 +65,7 @@ $pedidos = $stmt->fetchAll();
             <?php endforeach; ?>
         <?php else: ?>
             <tr class="linha">
-                <td class="celulas" colspan="8">Nenhum pedido cadastrado.</td>
+                <td class="celulas" colspan="7">Nenhum pedido cadastrado.</td>
             </tr>
         <?php endif; ?>
     </table>

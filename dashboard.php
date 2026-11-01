@@ -15,17 +15,25 @@ if (empty($_SESSION['logado']) || empty($_SESSION['estabelecimento_id'])) {
     exit;
 }
 
+// Controle de acesso por cargo: se o cargo não pode ver essa página, redireciona
+include_once "includes/permissoes.php";
+exigir_permissao($pagina);
+
 // Cada página carrega só o CSS que ela realmente usa,
 // pra classes com o mesmo nome (.tabela, .acoes, .fundo...) não colidirem entre telas
 $css_por_pagina = [
     'home'               => ['dashboard/css/principal.css'],
     'produtos'           => ['dashboard/estoque/css/estoque.css'],
     'produtos_cadastrar' => ['dashboard/estoque/css/cadastrar.css'],
-    'editar-perfil'      => ['dashboard/estoque/css/cadastrar.css'],
+    'editar-perfil'      => ['dashboard/css/editar-perfil.css'],
     'produtos_editar'    => ['dashboard/estoque/css/cadastrar.css'],
     'pedidos'             => ['dashboard/vendas/css/pedidos.css'],
     'pedidos_cadastrar'   => ['dashboard/vendas/css/cadastrar.css'],
     'pedidos_editar'    => ['dashboard/vendas/css/cadastrar.css'],
+    'funcionarios'            => ['dashboard/estoque/css/estoque.css', 'dashboard/funcionarios/css/funcionarios.css'],
+    'funcionarios_detalhar'   => ['dashboard/estoque/css/estoque.css', 'dashboard/funcionarios/css/funcionarios.css'],
+    'funcionarios_cadastrar'  => ['dashboard/estoque/css/cadastrar.css', 'dashboard/funcionarios/css/funcionarios.css'],
+    'funcionarios_editar'     => ['dashboard/estoque/css/cadastrar.css', 'dashboard/funcionarios/css/funcionarios.css'],
 ];
 $css_da_pagina = $css_por_pagina[$pagina] ?? [];
 ?>
@@ -88,6 +96,21 @@ switch ($pagina) {
         break;
     case "pedidos_excluir":
         include "dashboard/vendas/excluir.php";
+        break;
+    case "funcionarios":
+        include "dashboard/funcionarios/index.php";
+        break;
+    case "funcionarios_cadastrar":
+        include "dashboard/funcionarios/cadastrar.php";
+        break;
+    case "funcionarios_editar":
+        include "dashboard/funcionarios/editar.php";
+        break;
+    case "funcionarios_excluir":
+        include "dashboard/funcionarios/excluir.php";
+        break;
+    case "funcionarios_detalhar":
+        include "dashboard/funcionarios/detalhar.php";
         break;
 
     default:

@@ -6,17 +6,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantidade      = !empty($_POST['quantidade']) ? (int) $_POST['quantidade'] : 0;
     $valor           = $_POST['valor'];
     $forma_pagamento = $_POST['forma_pagamento'];
+    // Funcionário logado: a venda fica no nome dele. Só o dono (login do estabelecimento) escolhe.
+    $funcionario_id  = !e_dono() ? (int) $_SESSION['funcionario_id'] : (int) ($_POST['funcionario_id'] ?? 0);
     $dt_pedido       = empty($_POST['dt_pedido']) ? date('Y-m-d'): $_POST['dt_pedido'];
 
     try {
         $conexao->beginTransaction();
 
+           // O funcionário precisa existir e ser deste estabelecimento
+           $stmtFunc = $conexao->prepare(
+               "SELECT COUNT(*) FROM funcionarios
+                WHERE idfuncionarios = :id AND estabelecimento_idestabelecimento = :estab"
+           );
+           $stmtFunc->execute([':id' => $funcionario_id, ':estab' => $estabelecimento_id]);
+           if ($stmtFunc->fetchColumn() == 0) {
+               throw new Exception('Selecione o funcionário que realizou a venda.');
+           }
+
            $stmtPedido = $conexao->prepare(
                "INSERT INTO itens_pedido 
                    (produtos_idprodutos, 
-                    dt_pedido, valor, quantidade, form_pagamento, estabelecimento_idestabelecimento)
+                    dt_pedido, valor, quantidade, form_pagamento, estabelecimento_idestabelecimento,
+                    funcionarios_idfuncionarios)
                 VALUES 
-                   (:produto_id, :dt_pedido, :valor, :quantidade, :forma_pagamento, :estabelecimento_id)"
+                   (:produto_id, :dt_pedido, :valor, :quantidade, :forma_pagamento, :estabelecimento_id,
+                    :funcionario_id)"
            );
            $stmtPedido->execute([
                ':produto_id'         => $produto_id,
@@ -24,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                ':valor'              => $valor,
                ':quantidade'         => $quantidade,
                ':forma_pagamento'    => $forma_pagamento,
-               ':estabelecimento_id' => $estabelecimento_id
+               ':estabelecimento_id' => $estabelecimento_id,
+               ':funcionario_id'     => $funcionario_id
            ]);
    
            $stmtEstoqueUpdate = $conexao->prepare(
@@ -81,6 +96,16 @@ $stmtProdutos = $conexao->prepare(
 $stmtProdutos->execute([':estabelecimento_id' => $estabelecimento_id]);
 $produtos = $stmtProdutos->fetchAll();
 
+// Funcionários para o select "quem realizou a venda"
+$stmtFuncionarios = $conexao->prepare(
+    "SELECT idfuncionarios, nome
+     FROM funcionarios
+     WHERE estabelecimento_idestabelecimento = :estabelecimento_id
+     ORDER BY nome ASC"
+);
+$stmtFuncionarios->execute([':estabelecimento_id' => $estabelecimento_id]);
+$funcionarios = $stmtFuncionarios->fetchAll();
+
 ?>
 
 <main class="tabela content fundo">
@@ -131,6 +156,18 @@ $produtos = $stmtProdutos->fetchAll();
                     <option value="dinheiro">Dinheiro</option>
                 </select>
             </div>
+
+            <?php if (e_dono()): ?>
+            <div class="campo">
+                <label for="funcionario_id">Funcionário</label>
+                <select name="funcionario_id" id="funcionario_id" required>
+                    <option value="">Quem realizou a venda</option>
+                    <?php foreach ($funcionarios as $func): ?>
+                        <option value="<?= $func['idfuncionarios'] ?>"><?= htmlspecialchars($func['nome']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <?php endif; ?>
 
             <div class="acoes campo">
                 <button type="submit">Registrar pedido</button>

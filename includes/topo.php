@@ -7,10 +7,22 @@ $titulos = [
     'pets'               => 'Pets',
     'clientes'           => 'Clientes',
     'funcionarios'       => 'Funcionários',
+    'funcionarios_cadastrar' => 'Cadastrar funcionário',
+    'funcionarios_editar'    => 'Editar funcionário',
+    'funcionarios_detalhar'  => 'Detalhes do funcionário',
     'servicos'           => 'Serviços',
     'vendas'             => 'Vendas',
+    'pedidos'            => 'Vendas',
+    'pedidos_cadastrar'  => 'Cadastrar venda',
+    'pedidos_editar'     => 'Editar venda',
 ];
 $titulo_pagina = $titulos[$pagina] ?? 'Dashboard';
+
+// Quem está logado: funcionário (nome + cargo) ou o próprio estabelecimento (dono)
+include_once "includes/permissoes.php";
+$usuario_func = funcionario_logado();
+$nome_exibido = $usuario_func['nome'] ?? ($_SESSION['nome_fantasia'] ?? 'Estabelecimento');
+$cargo_exibido = $usuario_func['cargo'] ?? 'Gerente';
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <header class="topbar">
@@ -23,16 +35,20 @@ $titulo_pagina = $titulos[$pagina] ?? 'Dashboard';
             <div class="user d-flex align-items-center gap-2">
                 <img src="<?= !empty($_SESSION['foto']) ? 'assets/' . htmlspecialchars($_SESSION['foto']) : 'https://i.imgur.com/vzaeaUi.png' ?>" alt="Avatar image">
                 <div>
-                    <p class="name mb-0"><?= htmlspecialchars($_SESSION['nome_fantasia'] ?? 'Estabelecimento') ?></p>
-                    <p class="plan mb-0">Gerente</p>
+                    <p class="name mb-0"><?= htmlspecialchars($nome_exibido) ?></p>
+                    <p class="plan mb-0"><?= htmlspecialchars($cargo_exibido) ?></p>
                 </div>
             </div>
         </button>
         <div class="collapse" id="perfil">
             <ul>
-                <li><a href="dashboard.php?pagina=editar-perfil&idestabelecimento=<?=$_SESSION['estabelecimento_id']?>">Editar perfil</a></li>
+                <?php if (pode_acessar('conta')): ?>
+                    <li><a href="dashboard.php?pagina=editar-perfil&idestabelecimento=<?=$_SESSION['estabelecimento_id']?>">Editar perfil</a></li>
+                <?php endif; ?>
                 <li><a href="dashboard.php?pagina=logout">Sair</a></li>
-                <li><a href="dashboard.php?pagina=excluir-conta" class="text-danger">Excluir conta</a></li>
+                <?php if (pode_acessar('conta')): ?>
+                    <li><a href="dashboard.php?pagina=excluir-conta" class="text-danger">Excluir conta</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

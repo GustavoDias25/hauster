@@ -251,3 +251,26 @@
         margin: 0;
     }
 }
+
+
+/* ---------------------------------------------------------------------
+   PAGAMENTO: alinhamento do cabeçalho (computador, acima de 1000px)
+   O cabeçalho usa as mesmas duas colunas do .big-div (2fr 1fr, gap 20px):
+   o logo fica na coluna das formas de pagamento (mesmo .container) e o
+   botão na coluna do aside, com a mesma largura máxima e centralização.
+   Até 1000px, vale o layout de uma coluna definido no pagamento.css.
+   --------------------------------------------------------------------- */
+@media (min-width: 1001px) {
+    header.header-pagamento .menu {
+        grid-template-columns: 2fr 1fr;
+        column-gap: 20px;
+        padding: 0;
+    }
+
+    header.header-pagamento .menu-botao {
+        grid-area: 1 / 2;
+        max-width: var(--largura-aside);
+        margin: 0 auto;
+        padding: 0;
+    }
+}

@@ -16,9 +16,9 @@
 <body>
         <main class="area-logo">
             <picture>
-                     <source media="(max-width: 1024px)" srcset="../assets/Logo-hauster.png">
-                     <source media="(max-width: 600px)" srcset="../assets/favicon.png">
-                     <img src="../assets/logo-vertical.png" alt="Descrição da imagem">
+                     <a href="../index.html"><source media="(max-width: 1024px)" srcset="../assets/Logo-hauster.png"></a>
+                     <a href="../index.html"><source media="(max-width: 600px)" srcset="../assets/favicon.png"></a>
+                     <a href="../index.html"><img src="../assets/logo-vertical.png" alt="Descrição da imagem"></a>
                 </picture>
         </main>
         <section class="area-form">
@@ -32,7 +32,7 @@
         <input type="text" name="nome" id="nome" placeholder="Nome do Petshop" require>
     </div>
     <div class="inputs">
-        <input type="text" name="CNPJ" id="CNPJ" placeholder="CNPJ do petshop" maxlength="18" required>
+        <input type="text" name="CNPJ" id="CNPJ" placeholder="00.000.000/0000-00" maxlength="18" required>
     </div>
     <div class="inputs">
         <input type="email" name="email" id="email" placeholder="Email do petshop" require>
