@@ -1,0 +1,238 @@
+:root{
+    --branco: #ffff;
+    --preto: #000000;
+    --primaria-100: #B0E8FE;
+    --primaria-200: #2CC7EC;
+    --primaria-base: #219EBC;
+    --primaria-400: #16778E;
+    --primaria-500: #0C5262;
+    --primaria-600: #042F3A;
+    --primaria-700: #011319;
+    --secundaria-100: #FFE9D2;
+    --secundaria-base: #FFB703;
+    --secundaria-hover: #e4a404;
+    --secundaria-300: #CE9300;
+    --secundaria-400: #9E7000;
+    --secundaria-500: #714F00;
+    --secundaria-600: #473000;
+    --secundaria-700: #211500;
+    --cinza-100: #F0F0F0;
+    --cinza-200: #B3B8BB;
+    --cinza-base: #8E9294;
+    --cinza-hover: #84888a;
+    --cinza-400: #6A6D6F;
+    --cinza-500: #494B4C;
+    --cinza-600: #2A2B2C;
+    --cinza-700: #101111;
+    --fundo: #023047;
+    --largura-aside: 380px;
+    --font: "Inter";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+.flex-padrao{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+header{
+    height: 100px;
+    background-color: var(--fundo);
+}
+
+.logo{
+    width: 200px;
+}
+
+.menu{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+}
+
+/* Logo e botão usam o .container do Bootstrap (mesma largura e margens das
+   formas de pagamento). Os dois ficam na mesma célula: logo à esquerda e
+   botão à direita. Em telas de computador, o responsivo.css separa cada um
+   na sua coluna, iguais às da página (formas de pagamento e aside). */
+.menu-logo,
+.menu-botao{
+    grid-area: 1 / 1;
+}
+
+.menu-logo .logo{
+    display: block;
+}
+
+.menu-botao{
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+}
+
+.menu-botao>a{
+    list-style: none;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+.botao-header{
+    background-color: var(--secundaria-base);
+    color: var(--branco);
+    padding: 7px 30px;
+    border-radius: 20px;
+}
+
+.menu-botao>a:hover{ 
+    background-color: var(--secundaria-hover);
+    color: var(--branco);
+    text-decoration: none;
+}
+
+.big-div{
+    display: grid;
+    grid-template-areas: 
+    "input aside";
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.pagamento{
+    grid-area: input;
+    width: 100%;
+}
+
+.credit_card{
+    background-color: var(--cinza-100);
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 4px solid var(--secundaria-base);
+}
+
+.select:hover{
+    background-color: var(--cinza-200);
+}
+
+.qrcode-pix{
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.submit{
+    margin-top: 10px;
+}
+
+.aside{
+    grid-area: aside;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+    max-width: var(--largura-aside);
+    height: auto;
+    margin: 30px auto;
+    padding: 28px 24px 24px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+}
+
+.aside h1{
+    margin: 0;
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.aside-conteudo{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--cinza-200);
+}
+
+.aside-conteudo p{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 1rem;
+}
+
+.aside-conteudo .rotulo{
+    color: var(--cinza-400);
+}
+
+.aside-conteudo .valor{
+    font-weight: 600;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Valor total em destaque */
+.aside-conteudo p:nth-child(2) .valor{
+    font-size: 1.2rem;
+}
+
+.botoes-aside{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.botoes-aside>a{
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: var(--branco);
+    text-align: center;
+    padding: 12px 16px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+#concluir{
+    background-color: var(--secundaria-base);
+}
+
+#concluir:hover{
+    background-color: var(--secundaria-hover);
+}
+
+#cancelar{
+    background-color: var(--cinza-base);
+}
+
+#cancelar:hover{
+    background-color: var(--cinza-hover);
+}
+
+#salvar{
+    background-color: var(--secundaria-base);
+    color: var(--branco);
+}
+
+#cancelar{
+    background-color: var(--cinza-200);
+    color: var(--branco);
+}
