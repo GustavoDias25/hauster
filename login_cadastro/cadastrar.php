@@ -11,8 +11,57 @@ $email = trim($_POST['email']);
 $senha = trim($_POST['senha']);
 $conf_senha = trim($_POST['conf_senha']);
 
+// deixa só os números do CNPJ
 $cnpj = preg_replace('/\D/', '', $cnpj);
 
+// 1) Confere se as senhas são iguais
+if ($senha != $conf_senha) {
+    $_SESSION['erro_cad'] = 'Senhas estão diferentes';
+    header('Location: index.php');
+    exit();
+}
+
+// 2) Confere se já existe CNPJ ou e-mail cadastrado
+try {
+    $stmt = $conexao->prepare(
+        'SELECT cnpj, email FROM estabelecimento WHERE cnpj = :cnpj OR email = :email'
+    );
+    $stmt->bindParam(':cnpj', $cnpj);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $existentes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $cnpj_existe = false;
+    $email_existe = false;
+
+    foreach ($existentes as $linha) {
+        if ($linha['cnpj'] === $cnpj) {
+            $cnpj_existe = true;
+        }
+        if (strtolower($linha['email']) === strtolower($email)) {
+            $email_existe = true;
+        }
+    }
+
+    if ($cnpj_existe && $email_existe) {
+        $_SESSION['erro_cad'] = 'Este CNPJ e este e-mail já estão cadastrados';
+    } elseif ($cnpj_existe) {
+        $_SESSION['erro_cad'] = 'Este CNPJ já está cadastrado';
+    } elseif ($email_existe) {
+        $_SESSION['erro_cad'] = 'Este e-mail já está cadastrado';
+    }
+
+    if ($cnpj_existe || $email_existe) {
+        header('Location: index.php');
+        exit();
+    }
+} catch (PDOException $e) {
+    $_SESSION['erro_cad'] = 'Erro ao verificar os dados: ' . $e->getMessage();
+    header('Location: index.php');
+    exit();
+}
+
+// 3) Só agora que os dados estão ok, trata a senha e a foto
 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
 $foto_nome = '../assets/foto_padrao.png';
@@ -28,17 +77,12 @@ if (!empty($_FILES['foto']['name']) && $_FILES['foto']['error'] === UPLOAD_ERR_O
         $destino = $pasta_destino . $novo_nome;
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $destino)) {
-            $foto_nome = $novo_nome; 
+            $foto_nome = $novo_nome;
         }
     }
 }
 
-if($senha != $conf_senha){
-    $_SESSION['erro_cad'] = 'Senhas estão diferentes';
-    header('Location: index.php');
-    exit();
-}
-
+// 4) Cadastra
 try {
     // planos_idplanos é obrigatório no banco: começa no primeiro plano
     // e é trocado quando a pessoa escolhe e conclui em planos.php / pagamento.php
@@ -64,7 +108,8 @@ try {
     header('Location: planos.php');
     exit;
 } catch (PDOException $e) {
-    $_SESSION['erro_cad'] = 'Error ao cadastrar usuário' . $e->getMessage();
+    $_SESSION['erro_cad'] = 'Erro ao cadastrar usuário: ' . $e->getMessage();
+    header('Location: index.php');
+    exit();
 }
-
 ?>
