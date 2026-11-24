@@ -1,7 +1,7 @@
 <?php
 // 1 Vendedor | 2 Atendente | 3 Veterinário | 4 Tosador | 5 Gerente | 6 Outros
 const PERMISSOES_POR_CARGO = [
-    1 => ['pedidos', 'produtos'],
+    1 => ['vendas', 'produtos'],
     2 => ['servicos'],
     3 => ['servicos', 'clientes', 'pets'],
     4 => ['servicos', 'clientes', 'pets'],
@@ -10,7 +10,7 @@ const PERMISSOES_POR_CARGO = [
 ];
 
 // Para onde mandar quem tenta abrir uma página sem permissão (primeira liberada, nesta ordem)
-const ORDEM_PAGINAS_INICIAIS = ['home', 'pedidos', 'produtos', 'servicos', 'clientes', 'pets', 'funcionarios'];
+const ORDEM_PAGINAS_INICIAIS = ['home', 'vendas', 'produtos', 'servicos', 'clientes', 'pets', 'funcionarios'];
 
 // true = quem logou foi o estabelecimento (dono); false = foi um funcionário
 function e_dono(): bool
