@@ -459,6 +459,9 @@
 
     body.dashboard .perfil-secao {
         padding: 20px;
+        max-width: 18.75rem;
+        justify-content: center;
+        align-items: center;
     }
 
     body.dashboard .perfil-barra button,
@@ -466,6 +469,32 @@
 
         flex: 1;
         text-align: center;
+    }
+
+    /* a própria foto vira o botão de escolher arquivo */
+    body.dashboard .perfil-foto-linha input[type="file"] {
+        display: none; /* continua no form e é enviado normalmente */
+    }
+
+    body.dashboard .perfil-foto-label {
+        pointer-events: auto;
+        cursor: pointer;
+    }
+
+    /* selinho para indicar que a foto é clicável */
+    body.dashboard .perfil-foto-label::after {
+        content: "Alterar";
+        position: absolute;
+        left: 50%;
+        bottom: -6px;
+        transform: translateX(-50%);
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--primaria-base);
+        color: var(--branco);
+        font-size: 0.7rem;
+        font-weight: bold;
+        line-height: 1.2;
     }
 }
 
