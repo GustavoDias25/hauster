@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT IGNORE INTO `funcionarios` (`idfuncionarios`, `nome`, `dt_nasc`, `salario`, `cpf`, `email`, `telefone`, `senha`, `cargos_idcargos`, `estabelecimento_idestabelecimento`) VALUES
-	(1, 'Gustavo', '2007-05-25', 2500.00, '19797682773', 'gubatera25@gmail.com', '21971291279', '$2y$10$Rs5y86p6J0a4aBrz8kz2LOewxOR/DqAhkzVBPOziZ38HWr4fg1fSC', 1, 18);
+	(1, 'Gustavo', '2007-05-25', 2500.00, '19797682773', 'gustavo@gmail.com', '21971291279', '$2y$10$1Q53GIman.ZnGU7M7JnFCOagXaDCJgbuIlBrpJxVBeMnWGvtxjr7O', 1, 18);
 
 CREATE TABLE IF NOT EXISTS `servicos` (
   `idservicos` int(11) NOT NULL AUTO_INCREMENT,
