@@ -111,7 +111,9 @@ $foto_perfil = !empty($perfil['foto']) ? $perfil['foto'] : 'foto_padrao.png';
                 </div>
                 <div class="perfil-secao-campos">
                     <div class="perfil-foto-linha">
-                        <img src="assets/<?= htmlspecialchars($foto_perfil) ?>" alt="Foto do estabelecimento" class="perfil-foto">
+                        <label for="foto" class="perfil-foto-label">
+                            <img src="assets/<?= htmlspecialchars($foto_perfil) ?>" alt="Foto do estabelecimento" class="perfil-foto" id="perfil-foto-preview">
+                        </label>
                         <input type="file" name="foto" id="foto" accept="image/png, image/jpeg, image/webp">
                     </div>
                 </div>
@@ -175,7 +177,18 @@ $foto_perfil = !empty($perfil['foto']) ? $perfil['foto'] : 'foto_padrao.png';
             <div class="perfil-barra">
                 <button type="submit" class="perfil-salvar">Salvar alterações</button>
                 <a href="dashboard.php?pagina=home" class="perfil-cancelar">Cancelar</a>
+                <a href="dashboard.php?pagina=excluir-conta" class="text-danger" id="excluir">Excluir conta</a>
             </div>
         </form>
     </div>
 </main>
+
+<script>
+// Mostra a prévia da foto escolhida (no celular o input fica escondido e a própria foto é o botão)
+document.getElementById('foto').addEventListener('change', function () {
+    const arquivo = this.files[0];
+    if (arquivo) {
+        document.getElementById('perfil-foto-preview').src = URL.createObjectURL(arquivo);
+    }
+});
+</script>
