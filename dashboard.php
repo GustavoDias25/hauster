@@ -1,6 +1,6 @@
-<link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-
 <?php
+ob_start(); // segura toda a saída até o fim
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -43,6 +43,7 @@ $css_da_pagina = $css_por_pagina[$pagina] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hauster - Dashboard</title>
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/side-bar.css">
     <?php foreach ($css_da_pagina as $css): ?>
         <link rel="stylesheet" href="<?= htmlspecialchars($css) ?>">
@@ -120,3 +121,4 @@ switch ($pagina) {
 
 </body>
 </html>
+<?php ob_end_flush(); ?>
