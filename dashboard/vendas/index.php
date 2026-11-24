@@ -2,7 +2,7 @@
 $estabelecimento_id = $_SESSION['estabelecimento_id'];
 
 $stmt = $conexao->prepare(
-    "SELECT ip.id_pedido, ip.dt_pedido, ip.valor, ip.produtos_idprodutos, ip.form_pagamento, p.idprodutos, p.nome_prod as produto,
+    "SELECT ip.id_pedido, ip.dt_pedido, ip.valor, ip.quantidade, ip.produtos_idprodutos, ip.form_pagamento, p.idprodutos, p.nome_prod as produto,
             f.nome AS funcionario
      FROM itens_pedido ip
      JOIN produtos p ON p.idprodutos = ip.produtos_idprodutos
@@ -36,6 +36,7 @@ $pedidos = $stmt->fetchAll();
             <th class="celulas">Produto</th>
             <th class="celulas">Data da venda</th>
             <th class="celulas">Valor da venda</th>
+            <th class="celulas">Quantidade da venda</th>
             <th class="celulas">Forma de pagamento</th>
             <th class="celulas">Funcionário</th>
             <th class="celulas">Ações</th>
@@ -48,6 +49,7 @@ $pedidos = $stmt->fetchAll();
                     <td class="celulas"><?= htmlspecialchars($pedido['produto']) ?></td>
                     <td class="celulas"><?= date('d/m/Y', strtotime($pedido['dt_pedido'])) ?></td>
                     <td class="celulas destaque"><?= htmlspecialchars($pedido['valor']) ?></td>
+                    <td class="celulas destaque"><?= htmlspecialchars($pedido['quantidade']) ?></td>
                     <td class="celulas destaque"><?= htmlspecialchars($pedido['form_pagamento']) ?></td>
                     <td class="celulas"><?= htmlspecialchars($pedido['funcionario'] ?? '—') ?></td>
                     <td class="celulas">
