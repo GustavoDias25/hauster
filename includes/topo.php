@@ -46,9 +46,7 @@ $cargo_exibido = $usuario_func['cargo'] ?? 'Gerente';
                     <li><a href="dashboard.php?pagina=editar-perfil&idestabelecimento=<?=$_SESSION['estabelecimento_id']?>">Editar perfil <span class="material-symbols-outlined icon-perfil editar">edit_square</span></a></li>
                 <?php endif; ?>
                 <li><a href="dashboard.php?pagina=logout">Sair<span class="material-symbols-outlined icon-perfil sair">exit_to_app</span></a></li>
-                <?php if (pode_acessar('conta')): ?>
-                    <li><a href="dashboard.php?pagina=excluir-conta" class="text-danger">Excluir conta<span class="material-symbols-outlined icon-perfil" id="deletar">cancel</span></a></li>
-                <?php endif; ?>
+                
             </ul>
         </div>
     </div>
