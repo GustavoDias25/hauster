@@ -1,13 +1,6 @@
 @charset "UTF-8";
 
-/* Editar perfil: cada assunto é um bloco, com os blocos em 2 colunas */
-
-.perfil-pagina {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.perfil-titulo {
+    .perfil-titulo {
     margin-bottom: 1.5rem;
     color: var(--cinza-600);
 }
@@ -66,6 +59,14 @@
     border: 3px solid var(--primaria-base);
 }
 
+/* Label que envolve a foto: no desktop não faz nada (quem escolhe o arquivo é o input) */
+.perfil-foto-label {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    pointer-events: none;
+}
+
 .perfil-campo {
     display: flex;
     flex-direction: column;
@@ -81,15 +82,9 @@
 .perfil-campo input,
 .perfil-campo select {
     padding: 10px;
-    border: 1px solid var(--cinza-200);
+    border-bottom: 3px solid var(--secundaria-base);
     border-radius: 8px;
     background-color: var(--branco);
-}
-
-.perfil-campo input:focus,
-.perfil-campo select:focus {
-    outline: none;
-    border-color: var(--primaria-base);
 }
 
 /* Barra de botões no final, alinhada à direita */
@@ -128,4 +123,8 @@
 
 .perfil-cancelar:hover {
     text-decoration: underline;
+}
+
+#excluir{
+    border:none;
 }
