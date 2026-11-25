@@ -91,7 +91,7 @@ $stmtProdutos = $conexao->prepare(
     "SELECT idprodutos, nome_prod, estoque, preco
      FROM produtos
      WHERE estabelecimento_idestabelecimento = :estabelecimento_id
-     ORDER BY nome_prod ASC"
+     ORDER BY idprodutos ASC"
 );
 $stmtProdutos->execute([':estabelecimento_id' => $estabelecimento_id]);
 $produtos = $stmtProdutos->fetchAll();
@@ -101,7 +101,7 @@ $stmtFuncionarios = $conexao->prepare(
     "SELECT idfuncionarios, nome
      FROM funcionarios
      WHERE estabelecimento_idestabelecimento = :estabelecimento_id
-     ORDER BY nome ASC"
+     ORDER BY idfuncionarios ASC"
 );
 $stmtFuncionarios->execute([':estabelecimento_id' => $estabelecimento_id]);
 $funcionarios = $stmtFuncionarios->fetchAll();
